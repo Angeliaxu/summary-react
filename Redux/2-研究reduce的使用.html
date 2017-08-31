@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr=[1,2,3];
+			let n=arr.reduce(function(prev,cur){
+				console.log(prev)
+				return prev;
+			},6)
+			console.log(n);
+			
+			/*	1。如果没有参数6，则打印n=1，在函数里面循环两次，从2开始，1作为prev
+			 * 	2.如果有参数6，则打印n=6，在函数里面循环三次，从1开始，6作为prev
+			 
+			 * */
+			
+			
+			/*
+		 	数组actions表示依次有三个 Action，分别是加0、加1和加2。数组的reduce方法接受 Reducer函数作为参数，
+		 	就可以直接得到最终的状态3，
+			 * */
+			const action=[
+				{
+					type:'ADD',
+					payload:0
+				},
+				{
+					type:'ADD',
+					payload:1
+				},
+				{
+					type:'ADD',
+					payload:2
+				}
+			]
+			
+			const reducer=(state=defaultvalue,action)=>{
+				switch (action.type){
+					case 'ADD':
+						return state+action.payload;
+					default:
+						return state;
+				}
+			}
+			
+			const m=action.reduce(reducer,0);
+			console.log(m);
+		</script>
+	</body>
+</html>
