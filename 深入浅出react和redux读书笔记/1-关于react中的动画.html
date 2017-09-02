@@ -1,0 +1,21 @@
+1.动画的实现两种方式：css3 ，脚本方式
+	css3方式优缺点：基于时间和速度曲线，可能不利于动画流畅，动画可能会被中途打断，但是运行效率高，浏览器原生支持。
+	脚本方式：不是浏览器原生支持，消耗资源多，可能出现卡顿
+2.使用每秒渲染60帧(60 frame per second),给用户带来足够流畅的视觉体验，1s=1000ms，1000/60=16。16毫秒去
+渲染1帧，能够达到比较流畅的动画效果。
+3.React提供ReactCSSTransitionGroup实现动画，通过npm install --save react-transition-group@1.x
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+	<CSSTransitionGroup
+		transitionName='example（class类名）'
+		transitionEnterTimeout={}
+		transitionLeaveTimeout={}
+	></CSSTransitionGroup>
+
+定制相关React组件类名是：example-enter
+				  example-enter-active
+				  example-leave
+				  example-leave-active
+动画时间长度：在csstransitiongroup和css类中加入时间，两处时间应该是一致的，原理在于：transitionEnterTimeout
+值为500是告诉transitiongroup每个新加入的组件动画持续时间是500ms，在动画开始之初，给组件加上类名，500ms之后，
+删除类名，正常显示组件。css中的500ms指定节奏完成动画过程。
+4.react-motion：两个参数来定义动画，一个是刚度，一个是阻尼
