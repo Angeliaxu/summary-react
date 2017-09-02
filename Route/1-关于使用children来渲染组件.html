@@ -1,0 +1,63 @@
+1.知识点：匹配路由时，路由的props会传递给组件，在组件内部查看props，包括history，location,match
+const Home=(props)=>{
+	console.log(props);
+	return <h1>Home</h1>
+};
+ReactDOM.render(
+  (
+    <Router>
+     	<div>
+     		<Route exact path="/" component={Home}/>
+     	</div>
+    </Router>
+  ),
+  document.getElementById('root')
+)
+2.使用children来渲染组件时，无论是在哪个路由上，都可以看见使用children渲染的组件,通过函数把props传递给about组件
+在其他路径打印出来的props里面match为null。但是在/about路径下的match不是为null
+const About=(props)=>{
+	console.log(props)
+	return <h1>about</h1>;
+}
+<Route  path="/about" children={(props)=>{
+     			return <About tr={props}/>;
+}}/>
+因此，可以使用match来判断如果不是在本路径下，match为null，在本路径下match不为null，而且只有在在match为真时
+就调用About组件，打印出about里面的props。
+<Route  path="/about" children={(props)=>{
+     			let {match}=props;
+     			return match&&<About tr={props}/>;
+     		}}/>
+3.demo文件
+import React,{Component} from 'react';
+import ReactDOM from 'react-dom';
+import {BrowserRouter as Router,Route,Link, Redirect} from 'react-router-dom';
+
+const Home=(props)=>{
+	return <h1>Home</h1>
+};
+const About=(props)=>{
+	console.log(props)
+	return <h1>about</h1>;
+}
+ReactDOM.render(
+  (
+    <Router>
+     	<div>
+     		<Route  exact path="/Aac" render={()=>{
+     			return (
+     				<div>
+     					<span>哈哈哈  ,我不是Aac,我是使用render返回的另一个东西</span>
+     				</div>
+     			)
+     		}}/>
+     		<Route exact path="/" component={Home}/>
+     		<Route  path="/about" children={(props)=>{
+     			let {match}=props;
+     			return match&&<About tr={props}/>;
+     		}}/>
+     	</div>
+    </Router>
+  ),
+  document.getElementById('root')
+)
