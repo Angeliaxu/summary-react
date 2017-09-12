@@ -18,4 +18,4 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 动画时间长度：在csstransitiongroup和css类中加入时间，两处时间应该是一致的，原理在于：transitionEnterTimeout
 值为500是告诉transitiongroup每个新加入的组件动画持续时间是500ms，在动画开始之初，给组件加上类名，500ms之后，
 删除类名，正常显示组件。css中的500ms指定节奏完成动画过程。
-4.react-motion：两个参数来定义动画，一个是刚度，一个是阻尼
+4.react-motion：两个参数来定义动画，一个是刚度(stiffness)，一个是阻尼（damping）

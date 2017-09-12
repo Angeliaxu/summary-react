@@ -1,0 +1,19 @@
+一个组件通过定义自己能够接受的prop就定义了自己的对外公共接口.
+·1.从父组件传入到子组件的props,在子组件中除了constructor(),在其他地方都可以拿到这个props;
+如果要想在constructor中拿到父组件传下来的props,必须要在constructor(props)
+和super(props)传递一下
+2.若父组件传递给子组件的props是一个对象,那么,当子组件改变这个对象的值时,父组件里面的值也会跟着
+改变.解决的办法就是在子组件里面深度克隆传递下来的对象.
+	子组件如何要继承父组件的数据，那么只会进constructor一次，
+	当父组件的数据发生变化的时候，就不会再进constructor，会进render
+    constructor、super中要传props
+3.关于proptypes:组件支持哪些prop,支持的prop应该是什么样的格式的.constructor
+组件.propTypes={
+	props:propTypes.类型.isRequired
+}
+	其中要求props必选是什么类型,isRequired表示使用组件必须要指定的props
+	产品上线的时候可以使用babel-react-optimize优化代码
+4.组件的defaultProps,尽量让代码逻辑判断少在组件中出现
+	组件.defaultProps={
+		state中需要有默认值的键:默认值
+	}
