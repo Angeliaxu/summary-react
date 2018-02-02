@@ -1,9 +1,26 @@
 const path = require('path');
-
-module.exports={
-    entry : './src/index.js',
-    output : {
-        path : path.resolve(__dirname,'dist'),
-        filename : 'index.js'
-    }
+const htmlwebpackplugin = require('html-webpack-plugin');
+module.exports = {
+    entry: './index',
+    output: {
+        filename: "index.js",
+        path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+        rules: [{
+            test: /\.js$/,
+            use: [{
+                loader: "babel-loader",
+                options: {
+                    presets: ['react']
+                }
+            }]
+        }]
+    },
+    plugins: [
+        new htmlwebpackplugin({
+            filename: 'main.html',
+            template: './index.html'
+        })
+    ]
 }
