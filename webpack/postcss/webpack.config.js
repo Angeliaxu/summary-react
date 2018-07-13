@@ -8,7 +8,7 @@ module.exports={
     output:{
         path:path.resolve(__dirname,'dist'),
         filename:'[name].bundle.js',
-        publicPath:'dist/'
+        publicPath:'/'
     },
     module:{
         rules:[
@@ -39,12 +39,13 @@ module.exports={
             },{
                 test:/\.(jpe?g|gif|png)$/,
                 use:{
-                    loader:'file-loader',
+                    loader:'url-loader',
                     options:{
-                        useRelativePath:true,
-                        publicPath:'',
-                        ouputPath:'dist/'
-                        
+                       limit:10000 ,
+                       name:'[name].[hash:5].[ext]',
+                       useRelativePath:true   ,
+                       outputPath:'dist/',
+                       publicPath:''
                     }
                 }
             }
@@ -54,5 +55,8 @@ module.exports={
         new MiniCssExtractPlugin({
             filename:'css/[name].css'
         })
-    ]
+    ],
+    devServer: {
+        open:true
+    }
 }
