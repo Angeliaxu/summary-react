@@ -1,0 +1,11 @@
+html{
+    transition: transform 1s;
+}
+
+:root{
+    --maincolor:red;
+}
+html{
+    /* background: ; */
+    background: var(--maincolor) url('../images/header/serve.jpg') no-repeat;
+}
