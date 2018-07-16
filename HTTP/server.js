@@ -13,12 +13,26 @@ http.createServer((req,res)=>{
         res.end(html);
     }
     if(req.url == '/script1.js'){
-        
-        res.writeHead(200,{
-            'Content-Type':'text/javascript',
-            'Cache-Control':'max-age=1800,public'
-        })
-        res.end('console.log("script loaded twice")');
+        console.log(req.headers);
+        const etag = req.headers['if-none-match'];
+        console.log(etag);
+        if(etag == 456 ){
+            res.writeHead(304,{
+                'Content-Type':'text/javascript',
+                'Cache-Control':'max-age=200000,no-store',
+                'Last-Modified':'123',
+                'Etag':'456'
+            })
+            res.end('');
+        }else{
+            res.writeHead(200,{
+                'Content-Type':'text/javascript',
+                'Cache-Control':'max-age=200000,no-store',
+                'Last-Modified':'123',
+                'Etag':'456'
+            })
+            res.end('console.log("script loaded twice")');
+        }
     }
     
 }).listen(8888);
