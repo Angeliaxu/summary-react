@@ -7,5 +7,5 @@ html{
 }
 html{
     /* background: ; */
-    background: var(--maincolor) url('../images/header/serve.jpg') no-repeat;
+    background: var(--maincolor) url('../../images/header/serve.jpg') no-repeat;
 }

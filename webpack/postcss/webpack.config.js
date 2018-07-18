@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const purifyCssPlugin = require('purifycss-webpack');
+const HtmlWebpackPlugin =  require('html-webpack-plugin');
 const path = require('path');
 
 module.exports={
@@ -42,10 +43,8 @@ module.exports={
                     loader:'url-loader',
                     options:{
                        limit:10000 ,
-                       name:'[name].[hash:5].[ext]',
-                       useRelativePath:true   ,
-                       outputPath:'dist/',
-                       publicPath:''
+                       name:'[name].[ext]',
+                       useRelativePath:true
                     }
                 }
             }
@@ -54,6 +53,9 @@ module.exports={
     plugins:[
         new MiniCssExtractPlugin({
             filename:'css/[name].css'
+        }),
+        new HtmlWebpackPlugin({
+            template:'./index.html'
         })
     ],
     devServer: {

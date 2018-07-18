@@ -1,2 +1,2 @@
-import './css/index.css';
-import './css/comon.css';
+import './css/common/index.css';
+import './css/common/comon.css';
