@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>the response is <span id ="data"></span></div>
+    <button  id="button">click me </button>
+    <script>
+        var n =0;
+        document.getElementById('button').onclick=function(){
+            n++;
+            document.getElementById('data').innerHTML='';
+            fetch('/data',{
+                headers:{
+                    'x-test':n
+                }
+            }).then(function(res){
+                return res.text();
+            }).then(function(res){
+                document.getElementById('data').innerHTML=res;
+            })
+        }
+       
+    
+    </script>
+</body>
+</html>
