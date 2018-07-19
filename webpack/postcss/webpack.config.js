@@ -1,6 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const purifyCssPlugin = require('purifycss-webpack');
 const HtmlWebpackPlugin =  require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+
 const path = require('path');
 
 module.exports={
@@ -8,7 +11,7 @@ module.exports={
     entry:'./src/index.js',
     output:{
         path:path.resolve(__dirname,'dist'),
-        filename:'[name].bundle.js',
+        filename:'js/[name].bundle.js',
         publicPath:'/'
     },
     module:{
@@ -24,7 +27,7 @@ module.exports={
                 {
                     loader:"css-loader",
                     options:{
-                        modules:true,
+                        // modules:true,
                         // localIdentalName:
                     }
                 },{
@@ -38,16 +41,49 @@ module.exports={
                     }
                 }]
             },{
-                test:/\.(jpe?g|gif|png)$/,
-                use:{
+                test:/\.(jpe?g|gif|png|svg)$/,
+                use:[{
                     loader:'url-loader',
                     options:{
-                       limit:10000 ,
+                       limit:100,
                        name:'[name].[ext]',
-                       useRelativePath:true
+                    //    useRelativePath:true,
+                       outputPath:'assert/images/'
                     }
-                }
-            }
+                },{
+                    loader:'img-loader',
+                    options:{
+                        plugins: [
+                            require('imagemin-gifsicle')({
+                                interlaced: false
+                            }),
+                            require('imagemin-mozjpeg')({
+                                progressive: true,
+                                arithmetic: false
+                            }),
+                            require('imagemin-pngquant')({
+                                floyd: 0.5,
+                                speed: 2
+                            }),
+                            require('imagemin-svgo')({
+                                plugins: [
+                                    { removeTitle: true },
+                                    { convertPathData: false }
+                                ]
+                            })
+                        ]
+                    }
+                }]
+            },
+            // {
+            //     test:path.resolve(__dirname,'src/component/a.js'),
+            //     use:{
+            //         loader:'imports-loader',
+            //         options:{
+            //             $:'jquery'
+            //         }
+            //     }
+            // }
         ]
     },
     plugins:[
@@ -55,10 +91,25 @@ module.exports={
             filename:'css/[name].css'
         }),
         new HtmlWebpackPlugin({
-            template:'./index.html'
+            template:'./index.html',
+            minify:{
+                collapseWhitespace:true
+            }
+        }),
+        new CleanWebpackPlugin(['dist']),
+        new webpack.ProvidePlugin({
+            $:'jquery',
+            React:'react',
+            ReactDom:'react-dom',
+            Component:['react','Component']
         })
     ],
     devServer: {
         open:true
+    },
+    resolve:{
+        alias:{
+            jquery:path.resolve(__dirname,'lib/jquery.js'),
+        }
     }
 }
