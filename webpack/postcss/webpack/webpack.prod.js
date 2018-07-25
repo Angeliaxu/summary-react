@@ -62,7 +62,7 @@ module.exports=merge(common,{
     //  生成环境下使用这个可以减小打包速度
     devtool: 'source-map',
     optimization: {
-        runtimeChunk: true,
+        runtimeChunk: 'single',
         splitChunks:{
             cacheGroups:{
                 // styles: {
@@ -82,6 +82,6 @@ module.exports=merge(common,{
     },
     plugins:[
         // new Analyzer(),
-        new webpack.NamedChunksPlugin()
+        new webpack.HashedModuleIdsPlugin()
     ]
 })

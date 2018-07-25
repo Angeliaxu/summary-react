@@ -1,9 +1,12 @@
 // import React,{Component} from 'react';
 // import ReactDOM from 'react-dom';
+require("babel-polyfill");
 import './css/config/global.scss';
 import PlusIndex from './pages/plusindex';
 
-import IndexPage from './pages/IndexPage';
+import('./pages/IndexPage').then(function(a){
+    console.log(a);
+});
 
 if(process.env.NODE_ENV == 'PRODUCTION'){
     console.log('你正处在线上环境')
