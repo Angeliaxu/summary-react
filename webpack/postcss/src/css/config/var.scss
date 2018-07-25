@@ -1,0 +1,55 @@
+// @font-face {
+// 	font-family: 'team';
+// 	src:url('/static/fonts/pingfang.eot?k2gxj3');
+// 	src:url('/static/fonts/pingfang.eot?k2gxj3#iefix') format('embedded-opentype'),
+// 		url('/static/fonts/pingfang.ttf?k2gxj3') format('truetype'),
+// 		url('/static/fonts/pingfang.woff?k2gxj3') format('woff'),
+// 		url('/static/fonts/pingfang.svg?k2gxj3#pingfang') format('svg');
+// }
+// Font=================================================================================================
+$font:"Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+$western-font: Georgia, Cambria, "Times New Roman", Times, serif !default;
+
+$font-size: 14px !default;
+$small-font-size: 12px !default;
+
+// Color================================================================================================
+//大标题 及有的文案
+$title-color:#303030 !default;
+//标题文案
+$text-color:#545454 !default;
+// 详情文案
+$details-color:#8b8b8b;
+
+//查看详细查看更多 link
+$link-color:#3d77e3 !default;
+
+//按钮背景 字体颜色 登录注册按钮等
+$blue: #5199f9;
+$hover-blue: #4284F5;
+
+// 立即试用 立即领取
+$promptly: #539DFA;
+$hover-promptly: #5AD8DF;
+
+//底部 文案颜色
+$ft-title-color:#3f3f3f;
+$ft-text-color:#575757;
+
+//块背景色
+$bg-color:#FAFAFA;
+
+// border颜色
+$border-color:#e8e8e8;
+
+// 春风计划黄色
+$yellow-color:#F9D45F;
+$yellow-hover-color:#EAC54D;
+
+$green-color:#32CED0;
+$green-hover-color:#47BDDE;
+
+
+// padding-top
+$paddingt:111px;
+// Mixin================================================================================================

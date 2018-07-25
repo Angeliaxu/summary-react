@@ -1,0 +1,188 @@
+header{
+    width: 100%;
+    background-color: $bg-color;
+    position: fixed;
+    box-sizing: border-box;
+    z-index: 10;
+}
+#logo{
+    width: 99px;   
+    height: 34px;
+    border:1px solid #000;
+    display: block;
+    background: url('../../images/logo.png') no-repeat;
+}
+header.header-wrap{
+    .content{
+        height: 63px;
+        @include clearfix;
+        .logo-link{
+            display: inline-block;
+        }
+        .logo{
+            border:0;
+            margin: 15px 0 0 0;
+        }
+
+    }
+}
+
+
+// 应用页面
+header.appheader-wrap{
+    border-bottom:1px solid $border-color;
+    height: 65px;
+    a.logo-link{
+        @include size(99px,34px);
+		margin-top: 15px;
+        display: inline-block;
+        background: url("/static/img/logo.png") no-repeat center;
+    }
+    .app-logo-link{
+        font-size: 18px;
+        color: $title-color;
+        display: inline-block;
+        position: relative;
+        top: -10px;
+        left: 10px;
+        border-left: 2px solid #979797;
+        line-height: 20px;
+        height: 20px;
+        padding-left: 20px;
+        margin-left: 20px;
+    }
+    // 小应用分类页面
+    .app-category-search{
+        @include size(360px,40px);
+        line-height: 40px;
+        font-size: 14px;
+        border:1px solid $border-color;
+        margin:12px 153px 0 0;
+        float: right;
+        color: $text-color;
+        &:focus{
+            border: 1px solid $blue;
+        }
+    }
+}
+@media screen and (max-width: 768px){
+    header.header-wrap{
+        .content{
+            height: 55px;
+            .logo{
+                margin: 15px 0 0 20px;
+                width: 60px;
+            }
+        }
+
+    }
+    .mobile-nav{
+        position: relative;
+        top: 10px;
+        float: right;
+        display: block;
+        width: 38px;
+        height: 38px;
+        border-radius: 100%;
+        border: 0;
+        background: #dde6ed;
+        transition: background 125ms ease 0ms;
+        z-index: 20;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        text-indent: -9999px;
+        right:20px;
+        cursor: pointer;
+        &:after,&:before{
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: block;
+            margin: auto;
+            content: '';
+            background: #000;
+            height: 1px;
+            width: 18px;
+            transition: transform 125ms ease 0ms;
+            top:22px;
+        }
+        &:before{
+            top: 15px;
+        }
+    }
+    .mobile-nav-active{
+        background: $blue;
+        &:after{
+            background: #fff;
+            transform: rotate(-45deg);
+            bottom: 23px;
+        }
+        &:before{
+            background: #fff;
+            transform: rotate(45deg);
+            top: 18px;
+        }
+    }
+    .mobile-nav-wrap{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        // min-height: calc(100vh);
+        padding-top: 55px;
+        // pointer-events: none;
+        z-index: 10;
+        opacity: 0;
+        background-color:#fff;
+        transition: right 125ms ease;
+        right:-100%;
+        .list{
+            a,.button{
+                font-size: 16px;
+                line-height: 50px;
+                padding-left: 25px;
+                color: $ft-title-color;
+                transition: color 125ms ease;
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+            .button{
+                &:after{
+                    content:'';
+                    background: url('/static/img/down.svg') no-repeat;
+                    position: relative;
+                    top: 24px;
+                    right: 36px;
+                    float: right;
+                    display: inline-block;
+                    margin-right: 20px;
+                    color: #72848e;
+                    @include size(10px,10px);
+                    transition: transform 250ms ease;
+                }
+            }
+            .mobile-nav-item-active{
+                color: $title-color;
+                &:after{
+                    transform: rotate(180deg);
+                }
+            }
+            .item{
+                display: none;
+                >a{
+                    display: block;
+                    font-size: 15px;
+                    line-height: 45px;
+                    padding-left: 25px;
+                    color: $text-color;
+                }
+
+            }
+        }
+    }
+    .mobile-nav-wrap-active{
+        opacity: 1;
+        right:0;
+    }
+}

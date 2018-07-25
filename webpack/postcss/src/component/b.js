@@ -1,1 +1,0 @@
-$('#root').addClass('bgcolor');

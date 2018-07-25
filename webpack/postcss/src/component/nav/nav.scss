@@ -1,0 +1,117 @@
+nav.nav-wrap{
+    position: fixed;
+    width: 100%;
+    height: 48px;
+    border-bottom:1px solid $border-color;
+    box-sizing: border-box;
+    top: 63px;
+    background-color:#fff;
+    z-index: 9;
+    .navigation{
+        box-sizing: border-box;
+        .navigation-tier-one{
+            font-size: 14px;
+            line-height: 48px;
+            display: inline-block;
+            margin-right:40px;
+            a{
+                color: $title-color;
+                &:visited,&:hover,&:active{
+                    color: $title-color;
+                }
+            }
+
+        }
+        .navigation-tier-two,.navigation-tier-three{
+            display: none;
+        }
+        .navigation-tier-two{
+            position: absolute;
+            padding: 22px 0;
+            background-color: #fff;
+            line-height: 45px;
+            font-size: 14px;
+            border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
+            box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+        }
+        .navigation-tier-three{
+            position: absolute;
+            left: 230px;
+            background: $bg-color;
+            width: 232px;
+            top: 0px;
+            box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.15);
+            line-height: 45px;
+            border-left: 0;
+            padding: 22px 0;
+        }
+        .navigation-products-categories{
+            @include float(left);
+            width: 209px;
+            .navigation-item{
+                color: $text-color !important;
+            }
+            span.fwb{
+                color: $title-color !important;
+            }
+        }
+        .navigation-subnav{
+            width: 232px;
+        }
+        // 字体颜色
+        .navigation-item,.navigation-category-cta,.navigation--item{
+            color: $title-color;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            padding-left: 30px;
+            cursor: pointer;
+            box-sizing: border-box;
+            &:visited,&:hover,&:active{
+                color: $title-color;
+            }
+        }
+        p.navigation-item{
+            cursor: default;
+        }
+        .navigation-category{
+            &:hover{
+                background-color: $bg-color;
+            }
+        }
+        .navigation-products-item{
+            &:hover{
+                background-color: #e0e0e0;
+            }
+
+        }
+        .navigation-category-cta{
+            background: url("../../images/left.svg") no-repeat 90%;
+        }
+        .navigation-has-secondary{
+            &:after{
+                content: '';
+                background: url("../../images/down.svg") no-repeat;
+                position: relative;
+                top: 22px;
+                right: -6px;
+                float: right;
+                display: inline-block;
+                margin-right: 20px;
+                color: #72848e;
+                width: 10px;
+                height: 10px;
+                transition: all 250ms ease;
+            }
+        }
+        .navigation-has-secondary-active{
+            &:after{
+                top: 16px;
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+}

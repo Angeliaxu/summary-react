@@ -1,20 +1,18 @@
-import './css/common/index.css';
-import './css/common/comon.css';
+// import React,{Component} from 'react';
+// import ReactDOM from 'react-dom';
+import './css/config/global.scss';
+import PlusIndex from './pages/plusindex';
 
-import A from './component/a';
+import IndexPage from './pages/IndexPage';
 
-class App extends Component{
-    constructor(){
-        super();
-    }
-    render(){
-        return(
-            <div>
-                <span>在html中引入图片！</span>
-                <A/>
-                <div className="test"></div>
-            </div>
-        )
-    }
+if(process.env.NODE_ENV == 'PRODUCTION'){
+    console.log('你正处在线上环境')
+}else{
+    console.log('你正处在线下环境')
 }
-ReactDom.render(<App/>,document.getElementById('root'));
+console.log(111);
+ReactDOM.render(<PlusIndex />,document.getElementById('root'))
+
+if(module.hot){
+    module.hot.accept();
+}
