@@ -4,10 +4,12 @@ require("babel-polyfill");
 import './css/config/global.scss';
 import PlusIndex from './pages/plusindex';
 
-import('./pages/IndexPage').then(function(a){
+import(/* webpackChunkName:'indexPage' */'./pages/indexPage').then((a)=>{
     console.log(a);
-});
-
+})
+//  import('./pages/indexPage').then((a)=>{
+//     console.log(a);
+//  })
 if(process.env.NODE_ENV == 'PRODUCTION'){
     console.log('你正处在线上环境')
 }else{
