@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <list v-for="item in todo" v-bind:todo="item" v-bind:key="item.id"></list>
+        </ul>
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 注册一个组件实例
+        Vue.component('list',{
+            props:['todo'],
+            template:"<li>{{todo.text}}</li>"
+        })
+        var app = new Vue({
+            el:'#app',
+            data:{
+                todo:[
+                    {id:0,text:'text 1'},
+                    {id:1,text:'text 2'},
+                    {id:2,text:'text 3'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
