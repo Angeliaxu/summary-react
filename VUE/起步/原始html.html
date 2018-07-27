@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" >
+        <p>这是一段html：{{text}}</p>
+        <p>这是一段html：<span v-html="text"></span></p>
+        <!-- {{message}} -->
+        <button v-bind:disabled="isbuttondisabled">按钮</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                text:"<span style='color:red'>this should be red</span>",
+                isbuttondisabled:undefined
+            }
+        })
+    
+    </script>
+</body>
+</html>

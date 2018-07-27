@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root" >
+        <span v-bind:title="message" v-once>
+            {{message}}  
+        </span>
+        <div>{{message}}</div>
+        <button v-on:click="changedata">点击改变数据</button>
+        <!-- {{message}} -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        var message={
+            message: '页面加载于 ' + new Date().toLocaleString()
+        }
+        var root = new Vue({
+            el:"#root",
+            data:message,
+            methods:{
+                changedata:function(){
+                    message.message = '更新啦'
+                }
+            },
+            created:function(){
+                console.log('1')
+            },
+            mounted:function(){
+                console.log('2')
+            },
+            updated:function(){
+                console.log('视图被更新')
+            }
+        })
+    
+    // console.log(root.$data,message);//true
+    // console.log(root.message);//false
+    </script>
+</body>
+</html>
