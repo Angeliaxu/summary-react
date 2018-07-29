@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in obj" :key="item.id">{{item.name}},{{item.age}},{{item.occupation}},{{item.lalal}}</li>
+        </ul>
+        <div>
+            <button @click="changeOrder">changeOrder</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                obj:[{
+                    name:'xuchang',
+                    age:18,
+                    occupation:'programmer'
+                }]
+            },
+            methods:{
+                changeOrder:function(){
+                    var y= Object.assign({},this.obj[0],{lalal:1111});
+                    // y.id = Math.random();
+                    var x = {
+                        name:'xiaoxu',
+                        age:48,
+                        occupation:'ssss'
+                    }
+                    // this.obj[0]=x;
+                    this.$set(this.obj,0,y);
+                    // this.obj[0]=y;
+                    // console.log(news);
+                }
+            }
+        })
+        console.log(app.random)
+    </script>
+</body>
+</html>

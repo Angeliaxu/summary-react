@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in obj">{{item.name}},{{item.age}},{{item.occupation}}</li>
+        </ul>
+        <div>
+            <button @click="changeOrder">changeOrder</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                obj:[{
+                    name:'xuchang',
+                    age:18,
+                    occupation:'programmer'
+                },{
+                    name:'Jerry',
+                    age:20,
+                    occupation:'dancer'
+                },{
+                    name:'Mark',
+                    age:40,
+                    occupation:'worker'
+                }]
+            },
+            methods:{
+                changeOrder:function(){
+                    // 更新视图
+                    this.obj[0].name = 'angelo'
+                    // 不更新视图
+                    this.obj[0].keyss = '1'
+                    console.log(this.obj)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

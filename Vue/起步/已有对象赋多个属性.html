@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(value) in obj">{{value}}</li>
+        </ul>
+        <div>
+            <button @click="changeOrder">changeOrder</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                obj:{
+                    name:'xuchang',
+                    age:18,
+                    occupation:'programmer'
+                }
+            },
+            methods:{
+                changeOrder:function(){
+                    var y = Object.assign(this.obj,{lalal:1111});
+                    y.name='xiaxu',
+                    console.log(this.obj);
+                    var x = {
+                        name:'xiaoxu',
+                        age:48,
+                        occupation:'ssss'
+                    }
+                    // this.$set(this.obj,0,y);
+                    this.obj=y;
+                    // console.log(news);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
