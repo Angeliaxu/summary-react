@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #parent{
+            height: 800px;
+            width: 500px;
+            overflow:scroll;
+            border:1px solid #000;
+        }
+        #parent div{
+            height: 1500px;
+            width: 500px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="parent" @scroll.passive="grandParentClick">
+            <div @click.prevent.self="parentClick">
+                <button @keyup.x="seeEvent('llll',$event)">click me</button>
+                <input @keyup.x="seeEvent('llll',$event)" type="text">
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.config.keyCodes.x=88
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message:'see u '
+            },
+            methods:{
+                seeEvent:function($1,event){
+                    console.log(event)
+                },
+                parentClick:function(){
+                    console.log('i am your parent')
+                },
+                grandParentClick:function(){
+                    console.log('scroll ing.....')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
