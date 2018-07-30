@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <div id="parent">
-            <input type="checkbox" v-model="message" placeholder="edit me" value="123">
+            <input type="text" v-model.lazy="message">
             <p>Message is: {{ message }}</p>
         </div>
     </div>
@@ -19,8 +19,9 @@
        
         let app = new Vue({
             el:'#app',
+            
             data:{
-                message:'ds'
+                message:''
             },
             methods:{
                 seeEvent:function($1,event){
@@ -28,7 +29,7 @@
                 }
             }
         })
-        console.dir(document.getElementsByTagName('input')[0])
+       console.log([]==false)
     </script>
 </body>
 </html>

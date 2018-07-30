@@ -10,25 +10,29 @@
 <body>
     <div id="app">
         <div id="parent">
-            <input type="checkbox" v-model="message" placeholder="edit me" value="123">
-            <p>Message is: {{ message }}</p>
+                <button-ele></button-ele>
+                <button-ele></button-ele>
+                <button-ele></button-ele>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-       
-        let app = new Vue({
-            el:'#app',
-            data:{
-                message:'ds'
+        Vue.component('button-ele',{
+            template:'<button @click="plus">you clicked me {{count}} times</button>',
+            data:function(){
+                return {
+                    count:0
+                }
             },
             methods:{
-                seeEvent:function($1,event){
-                    console.log(event)
+                plus:function(){
+                    this.count++
                 }
             }
         })
-        console.dir(document.getElementsByTagName('input')[0])
+        let app = new Vue({
+            el:'#app'
+        })
     </script>
 </body>
 </html>
