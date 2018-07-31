@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <div id="parent">
+                <post-ele></post-ele>
+                <p style="color:red">{{obj.title}}</p>
+                <button @click="getData">i'm ur father button</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('post-ele',{
+            template:`<div>
+                   <h1>{{copyTitle.title}}</h1>
+                   <button @click="listentChange">click me change prop</button>
+            </div>`,
+            props:{
+                obj:{
+                    type:Object,
+                    default:function(){
+                        return { title: '我是默认值'}
+                    }      
+                }
+            },
+            data:function(){
+                return {
+                    copyTitle:Object.assign({},{},this.obj)
+                }
+            },
+            methods:{
+                listentChange:function(){
+                    this.copyTitle.title="我改变了~"
+                }
+            }
+        })
+        let app = new Vue({
+            el:'#app',
+            data:{
+                obj:{
+                    title:' 这是一个组件 '
+                }
+            },
+            methods:{
+                getData:function(){
+                    console.log(this.obj)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

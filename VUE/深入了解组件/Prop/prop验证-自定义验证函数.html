@@ -10,35 +10,26 @@
 <body>
     <div id="app">
         <div id="parent">
-                <post-ele :title="title"></post-ele>
+                <post-ele :title="'2222'"></post-ele>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         Vue.component('post-ele',{
             template:`<div>
-                   <h1>{{trimStr}}</h1>
-                   <button @click="">click me change prop</button>
+                   <h1>{{title}}</h1>
             </div>`,
             props:{
-                title:''
-            },
-            data:function(){
-                return {
-                    copyTitle:this.title
-                }
-            },
-            computed:{
-                trimStr:function(){
-                    return this.title.split('').join('*');
+                title:{
+                    type:String,
+                    validator:function(value){
+                        return value == '123';
+                    }
                 }
             }
         })
         let app = new Vue({
-            el:'#app',
-            data:{
-                title:' 这是一个组件 '
-            }
+            el:'#app'
         })
     </script>
 </body>
