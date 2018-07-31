@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <div id="parent">
+                <post-ele v-for="item in posts" :posts="item"></post-ele>
+        </div>
+        <button @click="addAttr">click me add attribute</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('post-ele',{
+            template:`<div>
+                    <h3>{{posts.title}}</h3>
+                    <p>{{posts.content}}</p>
+            </div>`,
+            props:['posts']
+        
+        })
+        let app = new Vue({
+            el:'#app',
+            data:{
+                posts:[
+                    {
+                        id:1,
+                        title:'My journey with Vue'
+                    },
+                    {
+                        id:2,
+                        title:'Blogging with Vue'
+                    }
+                ]
+            },
+            methods:{
+                addAttr:function(){
+                    this.posts.forEach((element,index,array)=> {
+                        this.$set(element,'content','添加了一点内容')
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

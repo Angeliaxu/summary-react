@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <div id="parent">
+                <!-- <post-ele :value="searchText" @model-change="TITLE"></post-ele> -->
+                <post-ele v-model="searchText"></post-ele>
+                <!-- <input type="text" v-model="searchText">
+                <input type="text" :value="searchText" @input="search">
+                 -->
+                <p>{{searchText}}</p>
+        </div>
+        <!-- <button @click="addAttr">click me add attribute</button> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('post-ele',{
+            template:`<div>
+                    <input type="text" :value="value" @input="$emit('input',$event.target.value)"/>
+            </div>`,
+            props:['value']
+        })
+        let app = new Vue({
+            el:'#app',
+            data:{
+                searchText:''
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="app">
+        <div id="parent">
+                <post-ele>
+                    这是一个子组件
+                </post-ele>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('post-ele',{
+            template:`<div>
+                    <input type="text" :value="value" @input="$emit('model-change',$event)"/>
+                    <slot></slot>
+            </div>`,
+            props:['value']
+        })
+        let app = new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
