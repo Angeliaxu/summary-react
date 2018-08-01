@@ -20,7 +20,8 @@
 <body>
     <div id="app">
         <div id="parent">
-                <post-ele class="form-control"></post-ele>
+            <input type="text" v-bind="collection">
+                <post-ele class="form-control" title="shuxing" style="height:100px;" placeholder="456"></post-ele>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -29,11 +30,19 @@
             inheritAttrs: false,
             template:`<div class="color">
                    <p>1111</p>
-            </div>`
-            
+                   <input type="text" v-bind="$attrs"/>
+            </div>`,
+            created() {
+                console.log(this.$attrs);
+            },
         })
         let app = new Vue({
-            el:'#app'
+            el:'#app',
+            data:{
+               collection:{
+                placeholder:'please enter '
+               }
+            }
         })
     </script>
 </body>
