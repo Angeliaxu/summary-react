@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <p>{{message}}</p>
+        <just-demo ></just-demo>
+        <button @click="">click me</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+         Vue.component('just-demo', {
+            template:`<div >
+                <input type="text" palceholder="请输入你的名字"/>
+                <button @click="focus">test inject</button>
+            </div>`,
+            methods:{
+                focus(){
+                    this.map();
+                }
+            },
+            inject:['map']
+        })
+        new Vue({
+            el:'#root',
+            data:{
+                message:'我是一个组件'
+            },
+            methods:{
+                getMap(){
+                    console.log(1111);
+                }
+            },
+            provide:function(){
+                return{
+                    map:this.getMap
+                }
+            }
+        })
+       
+    </script>
+</body>
+</html>
