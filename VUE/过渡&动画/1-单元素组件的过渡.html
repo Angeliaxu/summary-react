@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 2s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <transition name="fade">
+            <p v-if="seen">{{message}}</p>
+        </transition>
+        <button @click="TOOGLE">click me</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                message:'我是一个组件',
+                seen:true
+            },
+            methods:{
+                TOOGLE(){
+                    this.seen = !this.seen;
+                }
+            }
+        })
+       
+    </script>
+</body>
+</html>

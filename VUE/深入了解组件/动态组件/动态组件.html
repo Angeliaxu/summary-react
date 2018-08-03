@@ -56,6 +56,12 @@
             margin-top: 0;
             padding-top: 0;
         }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 2s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +74,7 @@
             {{tab}}
         </button>
         <keep-alive>
-            <component :is="currentTabComponent"></component>
+            <component :is="currentTabComponent"></component>  
         </keep-alive>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -106,16 +112,21 @@
                             </li>
                         </ul>
                         <div class="selected-post-container">
+                        <transition name="fade">
                             <div 
                                 v-if="selectedPost"
                                 class="selected-post"
-                            >
-                                <h3>{{ selectedPost.title }}</h3>
-                                <div v-html="selectedPost.content"></div>
+                            >   
+                                
+                                    <h3>{{ selectedPost.title }}</h3>
+                                    <div v-html="selectedPost.content"></div>
+                                
                             </div>
+                            
                             <strong v-else>
                             Click on a blog title to the left to view it.
                             </strong>
+                        </transition>
                         </div>
                     </div>`,
         });
