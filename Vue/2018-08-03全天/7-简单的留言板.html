@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>简易留言板</h2>
+			<hr />
+			<input @keydown="addTodo" v-model="value" >
+			<ul>
+				<li v-for="item in list">{{item.title}}</li>
+			</ul>
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					value: '',
+					list:[{title:'hello'}]
+				},
+				methods:{
+					addTodo(e){
+						if(e.keyCode === 13){
+							this.list.push({
+								title: this.value
+							})
+							this.value = '';
+						}
+					}
+				}
+			})
+
+		</script>
+	</body>
+</html>

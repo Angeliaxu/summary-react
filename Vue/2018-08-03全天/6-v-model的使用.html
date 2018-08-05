@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>简易留言板</h2>
+			<hr />
+			<input :value="value" @input="changeValue">
+			<p>{{value}}</p>
+			<hr />
+			<input v-model="value2" >
+			<p>{{value2}}</p>
+			<hr />	
+			<input type="checkbox" v-model="bl" >
+			<p>{{bl}}</p>
+		</div>
+		<script>
+
+			/*
+				双向数据绑定
+					数据 绑定到模板
+					模板中交互会改变数据 模板会自动更新
+
+					v-model="表达式"
+						语法糖：把几个语法合并方便操作
+
+						作用在表单控件上
+							input selecte textarea
+								input value checked
+
+							根据不同元素的可交互的属性，进行绑定和监听
+
+						v-model做了两件事情：
+							1. 把表达式的值绑定给元素可交互的属性
+							2. 监听交互属性的变化，赋值给表达式
+			*/
+
+			new Vue({
+				el: '#app',
+				data: {
+					value: '123',
+					value2: '456',
+					bl:false
+				},
+				methods:{
+					changeValue(e){
+						this.value = e.target.value;
+					}
+				}
+			})
+
+		</script>
+	</body>
+</html>

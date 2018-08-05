@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<p>{{message}}</p>
+			<p>abc</p>
+		</div>
+		<script>
+			/*
+				使用new创建一个对象
+				对象上很多属性，有$开头的是Vue内置的属性
+				在选项对象中写入在data，methods、computed里面的属性，最终都会挂载在实例上
+			
+				更新DOM，只会更新数据改变的元素，其他元素不更新
+
+			*/
+			let vm = new Vue({
+				el: '#app', // document.getElementById('app')
+				data: { // 数据对象，将来使用在模板中
+					message: 'hello'
+				}
+			});
+
+			/*
+				声明式
+				命令式
+			*/
+
+			let arr = [1,2,3,4,5];
+			// 需求：是每一项都*2
+
+			// 命令式
+			let newArr = [];
+			for( var i = 0; i < arr.length; i++ ){
+				newArr.push(arr[i] * 2)
+			}
+
+			// 声明式
+			let newArr2 = arr.map(item => item * 2)
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>单选全选</h2>
+			<hr />
+			{{message.split('').reverse().join('+')}}
+			
+			<p :abc="message.split('').reverse().join('')">{{message.split('').reverse().join('')}}</p>
+			<p :abc="reverseMessage">{{reverseMessage}}</p>
+			<p>{{reverseMessage}}</p>
+			<p>{{reverseMessage}}</p>
+			<p>{{reverseMessage}}</p>
+			<p>{{reverseMessage}}</p>
+			<p>{{reverseMessage}}</p>
+		</div>
+		<script>
+
+			/*
+				1. 把判断的逻辑抽离出来
+				2. 判断逻辑是依赖某个数据
+					数据发生变化，逻辑重新走一次
+
+				计算属性
+					计算得到的一个属性，计算得到的值会有很多的逻辑，逻辑执行之后才能得到计算属性的值，一般把这些逻辑放在函数中。
+
+					computed
+						{
+							custome(){
+								reutrn 值
+							}
+						}
+
+
+				不建议在模板中写很多逻辑判断，在模板中放入太多的逻辑会让模板过重且难以维护
+			*/
+
+			let vm = new Vue({
+				el: '#app',
+				data: {
+					message: 'hell,value'
+				},
+				computed: {  // 这里的属性也会放在实例上，内部会把函数执行了，每一个key值对应的value是函数执行后的返回值
+					// this -> 实例
+					reverseMessage(){
+						console.log(123)
+						return this.message.split('').reverse().join('');
+					}
+				}
+			})
+
+			console.log(vm);
+
+		</script>
+	</body>
+</html>

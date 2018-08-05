@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<input v-model="message" />
+			<h2>使用computed</h2>
+			<p :style="{color: colorComputed}">{{reverseMessage}}</p>
+			<p :style="{color: colorComputed}">{{reverseMessage}}</p>
+			<p :style="{color: colorComputed}">{{reverseMessage}}</p>
+			<p :style="{color: colorComputed}">{{reverseMessage}}</p>
+			<p :style="{color: colorComputed}">{{reverseMessage}}</p>
+			<p :style="{color: colorComputed}">{{reverseMessage}}</p>
+			<h2>使用methods</h2>
+			<p :style="{color: colorMethods('red')}">{{reverseMessageMethod()}}</p>
+			<p :style="{color:  colorMethods('blue')}">{{reverseMessageMethod()}}</p>
+			<p :style="{color:  colorMethods('yellow')}">{{reverseMessageMethod()}}</p>
+			<p :style="{color:  colorMethods('red')}">{{reverseMessageMethod()}}</p>
+			<p :style="{color:  colorMethods('red')}">{{reverseMessageMethod()}}</p>
+			<p :style="{color:  colorMethods('red')}">{{reverseMessageMethod()}}</p>
+		</div>
+		<script>
+
+			/*
+				1. 把判断的逻辑抽离出来
+				2. 判断逻辑是依赖某个数据
+					数据发生变化，逻辑重新走一次
+
+				计算属性
+					计算得到的一个属性，计算得到的值会有很多的逻辑，逻辑执行之后才能得到计算属性的值，一般把这些逻辑放在函数中。
+
+					在计算中依赖data中某个值，这个值发生变化，计算属性会重新计算
+
+					计算之后得到值后，就把值缓存起来了，之后多次使用这个计算属性，并不会重新计算了
+
+				methods
+					每次都要产生新的值，使用methods
+
+					computed
+						{
+							custome(){
+								reutrn 值
+							}
+						}
+
+
+				不建议在模板中写很多逻辑判断，在模板中放入太多的逻辑会让模板过重且难以维护
+			*/
+
+			let vm = new Vue({
+				el: '#app',
+				data: {
+					message: 'hell,value'
+				},
+				computed: { 
+					reverseMessage(){
+						console.log('computed执行了一次')
+						return this.message.split('').reverse().join('');
+					},
+					colorComputed(){
+						return 'blue'
+					}
+				},
+				methods: {
+					reverseMessageMethod(){
+						console.log('methods执行了一次')
+						return this.message.split('').reverse().join('');
+					},
+					colorMethods(color){
+						return color;
+					}	
+				}
+			});
+
+		</script>
+	</body>
+</html>

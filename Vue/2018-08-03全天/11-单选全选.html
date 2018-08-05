@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>单选全选</h2>
+			<hr />
+			<input type="checkbox" v-model="isCheckedAll"/> 全选
+			<hr />
+			<p v-for="item in list">
+				<input @change="changeOne(item,$event)" :checked="item.checked" type="checkbox" /> {{item.title}}
+			</p>
+		</div>
+		<script>
+
+			/*
+				1. 把判断的逻辑抽离出来
+				2. 判断逻辑是依赖某个数据
+					数据发生变化，逻辑重新走一次
+			*/
+
+			let list = [
+				{
+					title: 'hello1',
+					checked: true
+				},
+				{
+					title: 'hello2',
+					checked: true
+				}
+			]
+			let vm = new Vue({
+				el: '#app',
+				data: {
+					list
+				},
+				computed:{
+					// 给一个函数，默认是getter，取值的时候触发
+					/*isCheckedAll(){
+						return this.list.every(item => item.checked)
+					}*/
+					isCheckedAll: {
+						get(){
+							// 在模板中用这个计算属性，会触发这个函数
+							return this.list.every(item => item.checked)
+						},
+						set(newValue){
+							// 设置值会触发这个函数
+							console.log(newValue);
+							this.list.forEach(item => item.checked = newValue)
+						}
+					}
+				},
+				methods: {
+					changeAll(e){
+						this.list.forEach(item => item.checked = e.target.checked)
+					},
+					changeOne(item,e){
+						item.checked = e.target.checked;
+					}
+				}
+			})
+
+			console.log(vm);
+
+			// 属性可以写上一个存取器 getter/setter 对应的是get和set函数
+			// 当取一个属性值的时候会触发 get函数
+			// 当设置一个属性值的时候会触发 set函数
+			/*let value = 123;
+			let o = {
+				get miaov(){
+					console.log('取值了');
+					return value
+				},
+				set miaov(newvalue){
+					console.log('设置值了',newvalue);
+					value = newvalue;
+				}
+			}
+			o.miaov = 10;
+			console.log(o.miaov);*/
+
+
+		</script>
+	</body>
+</html>

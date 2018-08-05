@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+		.yellow {
+			background: yellow;
+		}
+			#app ul {
+				display: none;
+			}
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			let tabs =  [
+					{
+						title: '新闻',
+						list: [{
+							smallTitle: '新闻1'
+						},{
+							smallTitle: '新闻1'
+						},{
+							smallTitle: '新闻1'
+						},{
+							smallTitle: '新闻1'
+						}]
+					},
+					{
+						title: '娱乐',
+						list: [{
+							smallTitle: '娱乐1'
+						},{
+							smallTitle: '娱乐1'
+						},{
+							smallTitle: '娱乐1'
+						},{
+							smallTitle: '娱乐1'
+						}]
+					},
+					{
+						title: '体育',
+						list: [{
+							smallTitle: '体育1'
+						},{
+							smallTitle: '体育1'
+						},{
+							smallTitle: '体育1'
+						},{
+							smallTitle: '体育1'
+						}]
+					}
+				]
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>可以多个展开</h2>
+			<hr/>
+			<div v-for="item,index in tabs">
+				<h2 
+					:class="{yellow: item.show}"
+					@click="toggle(index)"
+				>
+					{{item.title}}
+				</h2>
+				<ul :style="{display: item.show ? 'block' : 'none'}">
+					<li v-for="option in item.list">
+						{{option.smallTitle}}
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+
+			tabs.forEach(item => item.show = false);
+
+			console.log(tabs);
+
+			new Vue({
+				el: '#app',
+				data: {
+					tabs,
+					currentIndex: -1
+				},
+				methods: {
+					toggle(i){
+						this.tabs[i].show = !this.tabs[i].show;
+					}
+				}
+			})
+
+		</script>
+	</body>
+</html>

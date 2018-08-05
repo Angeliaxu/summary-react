@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>单选全选</h2>
+			<hr />
+			<input type="checkbox" 
+				:checked="list.every(item => item.checked)"
+				@change="changeAll"
+			/> 全选
+			<hr />
+			<p v-for="item in list">
+				<input @change="changeOne(item,$event)" :checked="item.checked" type="checkbox" /> {{item.title}}
+			</p>
+		</div>
+		<script>
+
+			/*
+				1. 把判断的逻辑抽离出来
+				2. 判断逻辑是依赖某个数据
+					数据发生变化，逻辑重新走一次
+			*/
+
+			let list = [
+				{
+					title: 'hello1',
+					checked: true
+				},
+				{
+					title: 'hello2',
+					checked: true
+				}
+			]
+			new Vue({
+				el: '#app',
+				data: {
+					list
+				},
+				methods: {
+					changeAll(e){
+						this.list.forEach(item => item.checked = e.target.checked)
+					},
+					changeOne(item,e){
+						item.checked = e.target.checked;
+					}
+				}
+			})
+
+		</script>
+	</body>
+</html>

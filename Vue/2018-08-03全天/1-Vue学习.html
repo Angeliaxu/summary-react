@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<p>{{message}}</p>
+			<p>abc</p>
+		</div>
+		<script>
+			/*
+				使用new创建一个对象
+				对象上很多属性，有$开头的是Vue内置的属性
+				在选项对象中写入在data，methods、computed里面的属性，最终都会挂载在实例上
+			
+				更新DOM，只会更新数据改变的元素，其他元素不更新
+
+			*/
+			let vm = new Vue({
+				el: '#app', // document.getElementById('app')
+				data: { // 数据对象，将来使用在模板中
+					message: 'hello'
+				}
+			});
+
+			console.log(vm);
+
+			document.onclick = function (){
+				// 改变数据就，页面会更新视图
+				vm.message = 123444;	
+			}
+
+
+			
+		</script>
+	</body>
+</html>

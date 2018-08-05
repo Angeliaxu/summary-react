@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+		.yellow {
+			background: yellow;
+		}
+			#app ul {
+				display: none;
+			}
+		</style>
+		<script src="./src/vue.js"></script>
+		<script>
+			let tabs =  [
+					{
+						title: '新闻',
+						list: [{
+							smallTitle: '新闻1'
+						},{
+							smallTitle: '新闻1'
+						},{
+							smallTitle: '新闻1'
+						},{
+							smallTitle: '新闻1'
+						}]
+					},
+					{
+						title: '娱乐',
+						list: [{
+							smallTitle: '娱乐1'
+						},{
+							smallTitle: '娱乐1'
+						},{
+							smallTitle: '娱乐1'
+						},{
+							smallTitle: '娱乐1'
+						}]
+					},
+					{
+						title: '体育',
+						list: [{
+							smallTitle: '体育1'
+						},{
+							smallTitle: '体育1'
+						},{
+							smallTitle: '体育1'
+						},{
+							smallTitle: '体育1'
+						}]
+					}
+				]
+		</script>
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>只有一项展开</h2>
+			<hr/>
+			<div :class="['a','b']" v-for="item,index in tabs">
+				<h2 
+					:class="{yellow: index === currentIndex}"
+					@click="toggle(index)"
+				>
+						{{item.title}}
+				</h2>
+				<ul :style="addStyle(index)">
+					<li v-for="option in item.list">
+						{{option.smallTitle}}
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+
+			new Vue({
+				el: '#app',
+				data: {
+					tabs,
+					currentIndex: -1
+				},
+				methods: {
+					addStyle(index){
+						return {display: this.currentIndex === index ? 'block' : 'none'}
+					},
+					toggle(i){
+						this.currentIndex = this.currentIndex === i ? -1 : i;
+					}
+				}
+			})
+
+		</script>
+	</body>
+</html>
