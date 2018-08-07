@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            对象本身没有iterator接口，但是可以手动的给他实现一个。
+            for...of是可以迭代具有迭代对象的对象，迭代对象需要有迭代器
+            实现，迭代器是需要一套迭代协议规定的。
+
+            迭代器的实现代表着你在使用for...of的时候，可以拿到什么东西。
+        
+         */
+        let arr =[1,2,3];
+        // console.log(arr)
+        let obj ={
+            a:1,
+            b:2
+        };
+        obj[(Symbol.iterator)]=function(){
+            let keys = Object.keys(this);
+            let _this=this;
+            let len = keys.length;
+            let n = 0;
+            return{
+                next(){
+                    if(n<len){
+                        let k = keys[n];
+                        let i = _this[keys[n]];
+                        n++;
+                        return{
+                            value:{
+                                k,
+                                i
+                            },
+                            done:false
+                        }
+                        n++;
+                    }else{
+                        return{
+                            value:'',
+                            done:true
+                        }
+                    }
+                }
+            }
+        }
+        for(let {k,i} of obj){
+            console.log(k,i)
+        }
+    </script>
+</body>
+</html>
