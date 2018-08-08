@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            解构赋值：从数组或对象当中提取值，并对变量进行赋值
+        */    
+       let [a,b,c] = [1,2,3];//需要一一对应
+
+       let {foo,bar} = {foo:'aaa',bar:'bbbb'};//左侧变量必须是对象中存在的key，解构的属性不需要一一对象
+
+       let { left,top:tops} ={left:100,top:200}; //top在window下早就有了 这样解构出来报错，解决办法重新取名字
+       console.log(tops);
+
+       /* 
+            多重解构
+       */
+    </script>
+</body>
+</html>

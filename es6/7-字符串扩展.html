@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+           /* 
+                Unicode表示法：编码类型，后面跟的是16进制
+           */ 
+            // 以\u开头,61表示a ，四位，不够前面补零
+           console.log('\u0061');// a
+           console.log('\u4e01'); // 丁
+           console.log('\u1F602');// 不识别那么多字符，多余的会写出来
+           console.log('\u{1F602}');//虽然超出了 ，用大括号括起来，告诉它这是Unicode编码
+    </script>
+</body>
+</html>
