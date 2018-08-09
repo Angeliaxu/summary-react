@@ -21,7 +21,9 @@ export default new Vuex.Store({
     },
     mutations:{
         // 额 ，对象的key只能是字符串，以前是不能用变量来作为对象的key，会转变为字符串，如果有一个变量需要当做key，那么用[]把变量给包起来。
+        // mutataion可以接受额外的参数，即mutation的载荷（payload）
         [types.INCREMENT](state,payload){
+            console.log(payload)
             state.count += payload.n
         },
         [types.DECREMENT](state){
@@ -47,16 +49,20 @@ export default new Vuex.Store({
         // getter可以返回一个函数，调用getter可以传参
         lookInto:state=>(id)=>state.item.filter((item)=>{
             if(item.name == id){
-                console.log(1)
                 return 'have'
             }
         })
     },
     actions:{
-        increment({commit}){
-            // setTimeout(() => {
-                commit('decrement');
-            // }, 1000);   
+        // actions用来处理异步操作
+        incrementAction({commit},payload){
+            setTimeout(() => {
+                commit(types.INCREMENT,payload);
+            }, 1000);   
+        },
+        // actions可以接受额外的参数，即payload
+        payload({state,commit},payload){
+            console.log(payload);
         }
     }
 })
