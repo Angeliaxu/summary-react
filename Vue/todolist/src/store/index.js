@@ -54,15 +54,25 @@ export default new Vuex.Store({
         })
     },
     actions:{
-        // actions用来处理异步操作
+        // actions用来处理异步操作，返回一个Promise
         incrementAction({commit},payload){
-            setTimeout(() => {
-                commit(types.INCREMENT,payload);
-            }, 1000);   
+           return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    commit(types.INCREMENT,payload);
+                    resolve('数据修改成功');
+                }, 5000);
+           })    
         },
         // actions可以接受额外的参数，即payload
         payload({state,commit},payload){
             console.log(payload);
+        },
+
+        // async函数返回promise，测试一下
+
+        async testAsync({dispatch},payload){
+            await dispatch('incrementAction',payload);
+            return 1
         }
     }
 })

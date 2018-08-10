@@ -6,7 +6,7 @@
         name:'Num',
         computed:{
             count(){
-                return this.store.state.count
+                return this.$store.state.count
             }
         }
     }
