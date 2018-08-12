@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            对象简介表示法
+        */    
+
+        /* 
+            属性名表达式,js对象的key必须是一个字符串
+        */
+
+        let x = 1;
+        let j ={};
+        let obj ={
+            // 原来会把[x]看作是'[x]',但是在es6之后就是表示变量
+            [x]:2,
+            [j]:3
+        }
+        console.log(obj)
+    </script>
+</body>
+</html>

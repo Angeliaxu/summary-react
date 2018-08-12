@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            扩展运算符：...
+            把数组/对象转换成参数序列(使用逗号分隔的序列)
+
+            {left:200,top:200} => left:100,top:200
+
+            Math.max()
+        */   
+
+        var arr =[1,2,3,4,5,6,7];
+        // Math.max()接收n多个参数，不能把数组作为参数传进去
+        console.log(Math.max(...arr));
+
+        /* 
+            数组、对象的合并
+        */
+
+        var arr1 = [9,5,4,5,6,7,8];
+        console.log([...arr,...arr1])
+
+        let obj1 ={left:200,top:200}
+        let obj2 ={width:200,height:200}
+        // 具有相同key，后者会把前者给覆盖掉
+        console.log({...obj1,...obj2});
+    </script>
+</body>
+</html>

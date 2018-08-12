@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            Symbol的使用：属性私有化-数据保护
+        */    
+
+        // 我希望一个Person的性别在出生以后就被确定，并一直保存到死。
+
+        // function Person(name,gender){
+        //     this.name = name;
+        //     this.gender = gender;
+        // }
+        // var p1 = new Person('angelo','男');
+
+        /* 
+            怎样让一个属性私有化，老方法，第一种方式：使用闭包的方式
+        */
+
+       /*  var Person = (function(){
+            var _gender = ''
+            function p(name,gender){
+                this.name = name;
+                _gender = gender;
+            }
+            p.prototype.getGender=function(){
+                return _gender;
+            }
+            return p;
+        })();
+        var p1 = new Person('angelo','男');
+        console.log(p1.getGender()); */
+
+
+        /* 
+            第二种方式：使用Symbol
+        */
+
+        var Person = (function(){
+
+            var _gender = Symbol('gender');
+
+            function p(name,gender){
+                this.name = name;
+                this[_gender] = gender;
+            }
+            return p;
+        })();
+        var p1 = new Person('angelo','男');
+        // 虽然是通过Symbol('gender')来访问对象下的Symbol('gender')属性，但是这一次的值和在构造函数里面Symbol('gender')的值是不一样的。看的见拿不到
+        console.log(p1[ Symbol('gender')]);
+    </script>
+</body>
+</html>

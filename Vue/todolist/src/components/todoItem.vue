@@ -98,6 +98,7 @@
     }
     .delete{
         text-decoration:line-through;
+        font-style:italic;
     }
     .undelete{
         text-decoration: none;
