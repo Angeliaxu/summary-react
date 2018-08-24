@@ -11,7 +11,7 @@
             return{}
         },
         created() {
-            console.log(window.history.length)
+            // console.log(window.history.length)
         },
     }
 </script>
