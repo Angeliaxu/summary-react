@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let arr = ['a','b','c'];
+        // this指向问题，自己实现一个foreach（原理）
+        // some、every、map、filter、map、reduce
+        /* 
+            forEach方法第一个参数接受一个回调函数，第二参数是需要绑定的上下文
+         */
+       arr.forEach(()=>{
+           console.log(this); // window
+       })
+
+       function foreach(data,callback,context){
+           for(var i=0;i<data.length;i++){
+               callback.call(context,data[i],i);
+           }
+       }
+       function fn(item,index){
+           console.log(item,index);
+           console.log(this); // Number {1}
+       }
+       foreach(arr,fn,1);
+    </script>
+</body>
+</html>

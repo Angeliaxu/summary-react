@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //   reduce 方法
+    /* 
+        如果initialValue is provided intialIndex is start at index 0，
+        否则的话就是1。
+        reduce接受四个参数，上一次处理的值，当前处理的值，当前处理值的索引，当前被调用的函数
+     */
+    let arr = [1,2,3,4,5];
+    let result = arr.reduce(function(prev,current,intialIndex){
+        console.log(intialIndex);
+        return prev + current;
+    },0)//0 表示结果的初始值
+    console.log(result);
+    </script>
+</body>
+</html>

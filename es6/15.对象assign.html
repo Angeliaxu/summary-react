@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //  Object.assign()
+    /* 
+        后者会覆盖前者
+        如果第一个对象本身有名字，直接使用就行
+        浅拷贝
+     */
+     let obj ={
+         x:1,
+         y:2,
+         arr:[3,4,5]
+     }
+     let obj1 = {};
+     Object.assign(obj1,obj);
+     
+     obj1.arr.push(6);
+     console.log(obj1); 
+     console.log(obj); // 改变obj1的arr，obj的arr也会跟着改变，所以说是浅复制
+     obj1.x = 3;
+     console.log(obj.x); // obj的x属性不改变
+
+    //  深拷贝
+    let obj3 = JSON.parse(JSON.stringify(obj));
+    obj.arr.push(7);
+    console.log(obj3.arr);// 深拷贝，改变obj的arr并不会影响obj3的arr
+
+    // 合并对象，目标对象也会跟着改变
+    let o1 = {x:1};
+    let o2 = {y:2};
+    let o3 = {z:3};
+    
+    let obj4 = Object.assign(o1,o2,o3);
+    console.log(obj4);
+    sconsole.log(o1); // 目标对象跟着改变 变成和obj4一样的对象，解决办法：可以把obj4先声明当做目标对象
+    </script>
+</body>
+</html>
