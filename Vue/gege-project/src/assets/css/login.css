@@ -1,0 +1,73 @@
+body {
+  background-color: #f3f3f3;
+}
+#login_box {
+  width: 388px;
+  height: 500px;
+  margin: 100px auto;
+}
+#login_box .icon i {
+  width: 80px;
+  height: 80px;
+  background: url(../img/note.png) no-repeat;
+  background-size: 100%;
+}
+#login_box .icon span {
+  font: 36px/80px '微软雅黑';
+  margin-left: 80px;
+  color: #707070;
+}
+#login_box .inputArea {
+  margin-top: 30px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  padding: 30px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+#login_box .inputArea .remember {
+  margin-top: 35px;
+}
+#login_box .inputArea .remember input {
+  vertical-align: middle;
+}
+#login_box .inputArea .remember span {
+  font-size: 14px;
+}
+#login_box .inputArea .ivu-btn-success {
+  margin-top: 20px;
+  height: 45px;
+  font-size: 16px;
+}
+#login_box .sign {
+  margin-top: 30px;
+}
+#login_box .sign p,
+#login_box .sign div {
+  text-align: center;
+}
+#login_box .sign div {
+  font: 16px/24px '微软雅黑';
+  color: #2dbe60;
+}
+#login_box .password input {
+  margin-top: 15px;
+}
+#login_box .password p {
+  font: 16px/24px '微软雅黑';
+}
+#login_box .password .slide-fade-enter-active {
+  transition: all .8s ease;
+}
+#login_box .password .slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+#login_box .password .slide-fade-enter,
+#login_box .password .slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
