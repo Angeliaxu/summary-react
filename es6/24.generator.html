@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        generator函数
+         */
+
+         function* fn(){
+            console.log(1);
+
+            // yield  console.log(2);  // 返回undefined
+            yield getData();
+            consle.log(3);
+         }
+
+         let f = fn(); // 返回一个迭代器函数
+        //  console.log(f.next()); // {value: undefined, done: false}
+         console.log(f);
+
+        //  异步函数获取数据
+        
+        function getData(){
+            setTimeout(()=>{
+                f.next();
+            },1000)
+        }
+    </script>
+</body>
+</html>

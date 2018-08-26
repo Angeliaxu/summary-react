@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+          promise对象内部会维护一个状态
+          默认是：pending
+          成功：resolved
+          失败：rejected
+          当promise被实例化的时候，callback的异步任务就会被执行
+          promise.then()返回的是一个新的promise对象。这个对象当中的状态继承的是上一个
+          promise中的状态。无论是成功或者失败，默认返回成功
+          catch(),只要有错，后面的then就不会执行。catch和then一样，返回一个默认的promise的成功
+
+
+          promise.all()任务队列，一起完成才执行后续代码。两个任务都完成了
+          传进来的数据是一数组
+
+          promise.race()谁先跑完就触发then，另外的就不管了，传递进来的值是先
+          跑完的那个promise传递进来的值
+         */
+
+        // promise 的初始化状态
+         let pro = new Promise((resolve, reject) => {});
+         console.log(pro); // promise 的状态为pending，只要promise声明，默认的状态就是pending
+
+        // promise中then存在的问题
+
+        function fn(){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000)
+            })
+        }
+
+        let result = new fn();
+
+        result.then(() => {
+            console.log('success'); // 1s后打印success  
+        }, () => {
+            console.log('failed')
+        })
+    </script>
+</body>
+</html>

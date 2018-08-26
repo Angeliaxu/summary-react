@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+        class
+    
+     */
+
+    class person {
+        constructor() {
+            // 构造函数，对象初始化的时候执行的函数
+        }
+    }
+
+    // 继承
+
+    class Student extends person{
+        // 如果子类需要有自己的初始化过程,有自己的constructor函数
+        // 那么在子类中需要调用父类构造函数
+        constructor(){
+            super()
+        }
+    }
+    </script>
+</body>
+</html>

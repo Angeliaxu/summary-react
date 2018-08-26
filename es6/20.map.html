@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+       map:映射
+
+       object提供了“字符串-值”
+       map提供了“值-值”
+     */
+
+    //  对象的键只能是字符串
+     let o1 = {a:1};
+     let o2 = {b:2};
+     let obj ={};
+     obj[o1] = 2;
+     console.log(obj); // {[object Object]: 2}
+     
+    //  map数据结构解决上面的问题，map的键可以是任意类型
+    let map = new Map([[1, 'value1'],[2, 'value2']]);
+    console.log(map); // {1 => "value1", 2 => "value2"}
+    
+    // 私有的数据保护，使用mapdemo
+
+    // weakMap 类似Map，特点是key必须是对象，key是弱引用的，gc机制不考虑回收问题
+    
+    /* 
+        以下是一个列子来使用Map
+     */
+     function Person(){
+        //  let genders = new Map();
+         let genders = new WeakMap;
+         function p (name, gender){
+             this.name = name;
+             genders.set(this, gender) ;
+         }
+         p.prototype.getGender = function (){
+            return genders.get(this);
+         }
+        //  setInterval(()=>{
+        //      console.log(genders);
+        //  },100) 
+         return p;
+     }
+    var p = Person();
+    var p1 = new p('changchang','female');
+    var p2 = new p('gege','male');
+    console.log(p1.getGender()); // female
+    console.log(p2.getGender()); // male
+    // 对象之间的强引用
+    p1 = null;
+    console.log(p1);
+    /* 
+      上面代码把p1设置为null，说明p1这个对象不再在内存当中使用，会被垃圾回收机制
+      给回收掉，对应的genders设置的相应属性也应该被回收掉。但是genders = new Map（）
+      是一个对象之间的强引用，gc机制回收不了，导致相应的genders里的属性清除不掉。在
+      大型应用中如果考虑内存。那么应该把Map换做WeakMap。当把p1设置会null时。genders
+      里面的key是弱引用。
+    
+     */
+    </script>
+</body>
+</html>
