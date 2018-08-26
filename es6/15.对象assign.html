@@ -55,10 +55,33 @@
     let o9 = undefined;
     let o10 = null;
     /* 
-     
+        o6,o7,o8,o9,o10，在Object.assign的时候会被封装成对象。null和undefined会
+        被自动忽略掉，只有字符串的包装对象才有自身的可枚举属性。只有可枚举属性的对象
+        才会被拷贝
      */
     let obj6 = Object.assign({},o6,o7,o8,o9,o10);
     console.log(obj6); //{0: "a", 1: "b", 2: "c"}
+
+    // 继承属性和不可枚举属性是不可以被拷贝的
+    let obj7 = Object.create({z:1},{
+        bar:{
+            value:3
+        },
+        baz:{
+            value:4,
+            enumerable:true
+        }
+    });
+    /* 
+        {z:1} 继承属性
+        bar 不可枚举属性
+        baz 可枚举属性
+     */
+    let obj8 =Object.assign({},obj7);
+    console.log(obj8); // {baz: 4}
+    console.log(obj7);
+
+    // 拷贝过程中中途异常会打断后面的拷贝。前面拷贝的属性可以被访问。
     </script>
 </body>
 </html>

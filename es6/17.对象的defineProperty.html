@@ -8,17 +8,22 @@
 </head>
 <body>
     <script>
-    //  Object.defineProperty()
+    //  Object.defineProperty(obj, prop, descriptor)
     /* 
-        
+       obj : 要在其上定义属性的对象
+       prop：要定义或修改的属性的名称
+       descriptor：将被定义或修改的属性描述符
      */
+
+     let obj1 = {};
      Object.defineProperty(obj1,'z',{
         //  属性描述符，描述改属性的一些细节
         /* 
-            configurable
-            value
-            writable
-            enumberable：可枚举属性
+            configurable：为true，改属性描述符才能被改变，configurable特性表示对象的属性是否可以被删除，以及除writable特性外的其他特性是否可以被修改
+            同时该属性也能从对应的对象上被删除，默认为false
+            value：默认为undefined
+            writable：为true时，value才能被赋值运算符改变，默认为false
+            enumberable：可枚举属性，默认为false。for...in，object.keys()
             通过.或者[]等方式添加或修改属性上面那四种方式是true
          */
          /* 
@@ -26,7 +31,46 @@
             像toString方法为什么遍历不出来，是因为原生已经把可枚举
             设置成false了。
           */
+
+          /* 
+            数据描述符：value writable
+            存取描述符：get set 默认为undefined
+            上面两者不能混合使用
+           */
+     });
+
+     let o = {};
+    //  数据描述符
+     Object.defineProperty(o, 'a', {
+         value: 1,
+         writable: false,
+         enumerable: false,
+         configurable: false
      })
+     o.a = 2; // writable 为false，因此a属性的值不可修改
+     console.log(o.a); // 1
+
+     for(let key in o){
+         console.log(key); // 因为enumberable为false，所以对象o上的属性不能被遍历出来
+     }
+     delete o.a; // 当configurable为false时，代表a属性不能被删除
+     console.log(o); // {a: 1} 否则 {}
+
+    //  存取描述符
+    let stock;
+    let o1 = {};
+    Object.defineProperty(o1, 'a', {
+        get(){
+            return stock;
+        },
+        set(newValue){
+            stock = newValue;
+        },
+        enumerable: true,
+        configurable: true
+    })
+    o1.a = 33; // 对象o1拥有了属性a，值为33
+    console.log(stock); // 33
     </script>
 </body>
 </html>
