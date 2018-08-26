@@ -35,17 +35,27 @@
         function fn(){
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    resolve();
+                    reject();
                 }, 1000)
             })
         }
 
         let result = new fn();
-
+        // then返回的是一个promise
         result.then(() => {
             console.log('success'); // 1s后打印success  
+            // 默认返回一个状态为resolve的promise
         }, () => {
             console.log('failed')
+             // 默认返回一个状态为resolve的promise
+             /* 
+                如果要返回一个rejected
+              */
+              return Promise.reject();
+        }).then(() => {
+            console.log('success1');
+        },() => {
+            console.log('failed1'); // 1s后先打印failed 然后再打印success1
         })
     </script>
 </body>
