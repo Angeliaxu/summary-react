@@ -2,7 +2,7 @@
     <div id="app">
         <div>{{count}}</div>
         <ul>
-            <li v-for="item in item">{{item.name}}</li>
+            <li v-for="(item, index) in item" :key="index">{{item.name}}</li>
         </ul>
         <p>这是通过数组方式映射的数组长度：{{itemLen}}</p>
         <p>这是通过对象另取属性名的方式：{{length}}</p>
