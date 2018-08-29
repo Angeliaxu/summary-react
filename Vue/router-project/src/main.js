@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+// import App from './App.vue'
 import Nestroute from './components/nestRoute'
 
 import router from './router'

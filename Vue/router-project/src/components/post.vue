@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div>
         <div>用户发布的文章</div>
     </div>
 </template>

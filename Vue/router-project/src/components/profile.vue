@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div>用户的资料</div>
+        <div>用户的资料</div>
     </div>
 </template>
 

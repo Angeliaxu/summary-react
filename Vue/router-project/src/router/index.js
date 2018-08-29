@@ -19,8 +19,13 @@ const routes =[
         component:Bar
     },
     {
-        path:'/nest/:id',
+        path:'/',
+        component:User
+    },
+    {
+        path:'/nest/:id', // 嵌套路由
         component: User,
+        name: 'nest', // 命名路由
         children:[
             {
                 path:'profile',
