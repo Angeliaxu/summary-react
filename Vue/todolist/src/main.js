@@ -4,9 +4,9 @@ import Vuex from 'vuex'
 import 'es6-promise/auto';
 
 // import Todo from './App.vue'
-// import Count from './components/count.vue'
+import Count from './components/count.vue'
 // import asynccompenent from './components/asyncCompenent.vue'
-import boundarycompenent from './components/boundaryComponent.vue'
+// import boundarycompenent from './components/boundaryComponent.vue'
 
 import store from './store'
 
@@ -16,7 +16,7 @@ Vue.config.productionTip = false
 Vue.use(Vuex)
 
 new Vue({
-  render: h => h(boundarycompenent),
+  render: h => h(Count),
   store,
   data:{
     foo: 1
