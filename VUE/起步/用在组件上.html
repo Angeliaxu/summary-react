@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .isActive{
+            color:yellowgreen;
+        }
+        .hasError{
+            color:red;
+        }
+        .normal{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p class="normal" :class="attr">order message:{{message}}</p>
+        <first-component :class="attr"></first-component>
+        <button @click="changeClass">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>   
+    Vue.component('first-component',{
+        template:'<p class="normal">这是一个组件</p>'
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:"hello",
+            attr:{
+                isActive:true,
+                hasError:false
+            }   
+        },
+        methods:{
+            changeClass:function(){
+                this.attr.isActive=!this.attr.isActive;
+                this.attr.hasError = !this.attr.hasError;
+            }
+        }
+        
+    })
+    console.dir(app,app.getReverseMessage)
+    </script>
+</body>
+</html>

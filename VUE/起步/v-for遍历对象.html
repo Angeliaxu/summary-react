@@ -7,22 +7,23 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app" >
-        <!-- <p>这是一段html：{{text}}</p>
-        <p>这是一段html：<span v-html="text"></span></p>
-        {{message}} -->
-        <button v-bind:disabled="isbuttondisabled">按钮</button>
+    <div id="app">
+        <ul>
+            <li v-for="(item,key,index) in obj">{{item}},{{key}},{{index}}</li>
+        </ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         var app = new Vue({
             el:'#app',
             data:{
-                // text:"<span style='color:red'>this should be red</span>",
-                isbuttondisabled:undefined
+                obj:{
+                    name:'xuchang',
+                    age:18,
+                    occupation:'programmer'
+                }
             }
         })
-    
     </script>
 </body>
 </html>

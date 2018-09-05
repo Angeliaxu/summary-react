@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <template class="normal" :class="attr" v-if="condition === 'pagraphy1'">
+            <span>span1</span>
+            <span>span2</span>
+        </template>
+        <p class="normal" :class="attr" v-else-if="condition === 'pagraphy2'">222</p>
+        <p class="normal" :class="attr" v-else>333</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>   
+    
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:"hello",
+            attr:{
+                isActive:true,
+                hasError:false
+            } ,
+            condition:'pagraphy1'  
+        },
+    })
+    console.dir(app,app.getReverseMessage)
+    </script>
+</body>
+</html>
