@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <div>{{count}}</div>
+        <div>{{returnCount}}</div>
         <ul>
-            <li v-for="(item, index) in item" :key="index">{{item.name}}</li>
+            <li v-for="(item, index) in returnItem" :key="index">{{item.name}}</li>
         </ul>
         <p>这是通过数组方式映射的数组长度：{{itemLen}}</p>
         <p>这是通过对象另取属性名的方式：{{length}}</p>
@@ -33,14 +33,14 @@
             // 获取state值
             ...mapState(['count','item']),
             // 获取处理好的state值，getter在通过属性访问时作为vue的响应式系统一部分缓存其中的
-            ...mapGetters(['itemLen']),
+            ...mapGetters(['moduleA/itemLen', 'moduleA/returnItem', 'moduleA/returnCount']),
             // 通过对象形式访问getter可以给getter属性另取属性名。
             ...mapGetters({
-                length:'itemLen'
+                length:'moduleA/itemLen'
             }),    
             // 通过方法访问getter属性 
             havePerson(){
-               return this.$store.getters.lookInto('angelo')
+               return this.$store.getters['moduleA/lookInto']('angelo')
             }
         },
         methods:{
@@ -61,7 +61,7 @@
 
             // 使用辅助函数mapMutations
 
-            ...mapMutations(['decrement','pushItem','increment']),
+            ...mapMutations(['moduleA/decrement','moduleA/pushItem','moduleA/increment']),
             // 问题：怎么办increment映射出来并传入值,嘻嘻 解决了 如上，调用次方法的时候传入参数
             // increment(n){
             //     console.log(n);
@@ -93,13 +93,13 @@
             
             */
 
-            ...mapActions(['incrementAction','payload']),
+            ...mapActions(['moduleA/incrementAction','payload']),
 
             // 分发dispatch，并作为promise对象返回
 
             async dispatch(){
                 console.log(1)
-                await this.$store.dispatch('testAsync',{
+                await this.$store.dispatch('moduleA/testAsync',{
                     n:2
                 });
                 console.log(2)
@@ -110,7 +110,10 @@
         },
         async created(){
             await this.dispatch()
-        }
+        },
+        mounted() {
+            console.log(this.$store);
+        },
         
     }
 </script>

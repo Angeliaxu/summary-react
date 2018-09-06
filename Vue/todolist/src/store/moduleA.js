@@ -3,6 +3,7 @@ import * as types from './mutation_type';
 
 // 初始化数据
 const state = {  
+    count:0,
     item :[
         {
             id:0,
@@ -27,6 +28,8 @@ const mutations = {
         }, 1000);  
     },
     [types.PUSHITEM](state){
+        console.log(111);
+        console.log(state);
         state.item.push({
             id:3,
             name:'sdasad'
@@ -48,7 +51,9 @@ const getters = {
         if(item.name == id){
             return 'have'
         }
-    })
+    }),
+    returnItem: state => state.item,
+    returnCount: states => states.count
 }
 
 const actions = {
@@ -72,6 +77,8 @@ const actions = {
 }
 
 export default {
+    // 添加namespace，模块在自己内部
+    namespaced: true,
     state,
     mutations,
     getters,
