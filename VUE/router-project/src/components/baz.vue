@@ -1,12 +1,12 @@
 <template>
     <div class="foo">
-        <h3>i m bar</h3>
+        <h3>i m baz</h3>
     </div>
 </template>
 
 <script>
     export default{
-        name:'bar',
+        name:'baz',
         data(){
             return{}
         },
