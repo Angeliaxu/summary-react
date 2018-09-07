@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <navigator></navigator>
   </div>
 </template>
 
 <script>
+import navigator from '@/components/navigator';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    navigator
+  }
 }
 </script>
 
@@ -18,5 +23,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.is-active {
+  color: red;
+}
+a {
+  text-decoration: none;
+  color:#000;
+  display:inline-block;
+  margin: 0 15px;
 }
 </style>

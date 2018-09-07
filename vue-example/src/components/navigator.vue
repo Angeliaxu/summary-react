@@ -1,9 +1,12 @@
 <template>
-    <ul>
-        <router-link to="/home">Home</router-link>
-        <router-link to="/document">Document</router-link>
-        <router-link to="/About">About</router-link>
-    </ul>
+    <div>
+        <ul>
+            <router-link to="/home">Home</router-link>
+            <router-link to="/document" active-class="anotherColor">Document</router-link>
+            <router-link to="/About">About</router-link>
+        </ul>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -12,6 +15,11 @@
     }
 </script>
 
-<style>
-    
+<style scoped>
+    ul,li {
+        list-style: none;
+    }
+    .anotherColor {
+        color: yellowgreen;
+    }
 </style>
