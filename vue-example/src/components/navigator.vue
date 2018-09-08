@@ -8,8 +8,9 @@
                 exact代表精确匹配
              -->
             <router-link to="/home" tag="li">Home</router-link>
-            <router-link to="/document" active-class="anotherColor" tag="li">Document</router-link>
+            <router-link to="/document#current" active-class="anotherColor" tag="li">Document</router-link>
             <router-link :to="{name: 'about'}" tag="li">About</router-link>
+            <router-link to="/user" tag="li">User</router-link>
         </ul>
     </div>
 </template>

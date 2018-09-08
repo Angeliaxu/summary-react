@@ -8,6 +8,8 @@ import study from '@/components/study'
 import hobby from '@/components/hobby'
 import work from '@/components/work'
 import notFound from '@/components/404'
+import slider from '@/components/slider'
+import user from '@/components/user'
 // import navigator from '@/components/navigator'
 
 Vue.use(Router)
@@ -16,6 +18,30 @@ export default new Router({
   mode: 'history',
   // 路由点击高亮的别名,可以单独为routerLink设置active-class来显示当前路由的样式，给routerview设置class，class类名会传递给匹配组件的根节点
   linkActiveClass: 'is-active',
+  /* 
+    滚动行为:这个功能只在支持 history.pushState 的浏览器中可用
+    scrollBehavior只会在导航切换和浏览器前进后退的时候触发，其中
+    savePosition只会在浏览器前进和后退才会存在。
+  */
+  scrollBehavior: (to, from, savePosition) => {
+    // to目标路由，from从哪个路由过来
+    /* 就像原生浏览器表现的一样，导航切换滚动条始终在当前页面顶部
+      浏览器导航滚动条在滚动的位置
+    */
+  //  console.log(to);
+    // if(savePosition) {
+    //   return savePosition
+    // } else {
+    //   return {x:0, y:0}
+    // }
+    // 或者使用hash来导航
+    if(to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+    
+  },
   routes: [
     // {
     //   path: '/',
@@ -32,20 +58,32 @@ export default new Router({
     {
       path: '/document',
       name: 'document',
-      component: document
+      // component: document
+      // 命名视图，左边是侧边栏导航,根据给router-view不同的名字
+      // 来给出口渲染。
+      components:{
+        default: document,
+        slider
+      }
     },
     {
       path: '/about',
       component: about,
+      // 嵌套路由
       children: [
         /* 
           to="/about/hobby"
           使用:to="{name: 'hobby'}"和嵌套路由结合使用的时候
-          子路由前要加上/，在地址栏上显示的就是/hobby，而不是
+          子路由前要加上/，在地址栏上显示的就是/hobby，url路由不嵌套，但是
+          组件是嵌套的，而不是
           /about/hobby
         */
         {
-          path: '/study',
+          path: '/study', 
+          /* 
+            若study是字符串，则是相对于about导航，但是加上/则是相对于
+            根路径导航。
+          */
           component: study,
           name: 'study'
         },
@@ -71,6 +109,17 @@ export default new Router({
     //   component: notFound
     // },
     {
+      // 动态路由展示，若在地址栏里面直接访问/user是会重定向到home页
+      /* 
+        那是因为在路由配置当中没有配置对应的组件
+        此时是动态路由展示，path后面的字符串相当于
+        正则表达式。在后面加一个？表示最多1个最少可以
+        为0个
+      */
+      path: '/user/:id?',
+      component: user
+    },
+    {
       /* 当所输入的路由从上至下找不到的时候，重定向到某个页面或者直接显示404 */
       path: '*',
       // component: notFound
@@ -81,7 +130,7 @@ export default new Router({
       */
      redirect:(to) => {
       // 接受一个参数,参数就是目标路由，根据判断to的属性来重定向路由
-      console.log(to);
+      // console.log(to);
       // 记得一定要return
       return '/home'
      }

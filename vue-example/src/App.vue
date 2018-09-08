@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <navigator></navigator>
+    <router-view name="slider"></router-view>
     <router-view></router-view>
+    
   </div>
 </template>
 
