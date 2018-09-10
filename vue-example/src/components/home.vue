@@ -15,9 +15,9 @@ export default {
     methods: {
 
     },
-    components: {
-
-    }
+    created() {
+      document.title = this.$route.meta.title;
+    },
 }
 </script>
 

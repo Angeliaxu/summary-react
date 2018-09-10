@@ -30,6 +30,10 @@ export default {
     },
     components: {
 
+    },
+    created() {
+        console.log(this.$route);
+        document.title = this.$route.meta.title;
     }
 }
 </script>

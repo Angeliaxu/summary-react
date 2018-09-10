@@ -51,6 +51,7 @@
             }
         },
         created() {
+            document.title = this.$route.meta.title;
             let id = this.$route.params.id;
             if(id) {
                 this.userInfo = this.userList.filter((item) => {
