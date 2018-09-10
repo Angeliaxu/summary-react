@@ -33,7 +33,7 @@ export default {
     },
     created() {
         console.log(this.$route);
-        document.title = this.$route.meta.title;
+        // document.title = this.$route.meta.title;
     }
 }
 </script>

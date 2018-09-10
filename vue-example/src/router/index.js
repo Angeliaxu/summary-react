@@ -11,10 +11,11 @@ import work from '@/components/work'
 import slider from '@/components/slider'
 import user from '@/components/user'
 // import navigator from '@/components/navigator'
+import login from '@/components/login'
 
 Vue.use(Router)
 // 默认是hash模式,低版本使用hash模式，高版本使用history模式(html5 API),
-export default new Router({
+const router = new Router({
   mode: 'history',
   // 路由点击高亮的别名,可以单独为routerLink设置active-class来显示当前路由的样式，给routerview设置class，class类名会传递给匹配组件的根节点
   linkActiveClass: 'is-active',
@@ -129,6 +130,13 @@ export default new Router({
       }
     },
     {
+      path: '/login',
+      component: login,
+      meta: {
+        title: '用户登录'
+      }
+    },
+    {
       /* 当所输入的路由从上至下找不到的时候，重定向到某个页面或者直接显示404 */
       path: '*',
       // component: notFound
@@ -146,3 +154,22 @@ export default new Router({
     }
   ]
 })
+// 进入导航之前，做决策
+router.beforeEach((to, from, next) => {
+  // 所有页面必须登录之后才能进入，之前没加path，进入/login页面一直陷入死循环，
+  if (!window.localStorage.getItem('token') && to.path !== '/login') {
+    console.log(11111)
+    next('/login')
+  } else {
+    next()
+  }
+})
+// 进入导航之后，设置title
+router.afterEach((to, from) => {
+  if (to.meta.title) {
+    window.document.title = to.meta.title
+  } else {
+    window.document.title = '个人网站'
+  }
+})
+export default router
