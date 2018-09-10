@@ -1,0 +1,11 @@
+#app{
+    .fade-enter{
+        opacity: 0;
+    }
+    .fade-enter-to{
+        opacity: 1;
+    }
+    .fade-enter-active{
+        transition: 1.5s;
+    }
+}
