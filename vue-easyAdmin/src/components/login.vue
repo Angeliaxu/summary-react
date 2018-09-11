@@ -20,10 +20,17 @@ export default {
     methods: {
         login() {
             if (this.account && this.password) {
-                window.localStorage.setItem('token', this.account);
-                this.$router.push({path:'/project'});
+                this.$util.save('token', {
+                    account: this.account,
+                    login: true
+                });
+                let redirect = this.$route.query.redirect;
+                if (!redirect) {
+                    redirect = 'project'
+                }
+                this.$router.push('/'+ redirect);
             }
-        }
+        },
     }
 }
 </script>

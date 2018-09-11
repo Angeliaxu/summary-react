@@ -1,9 +1,11 @@
 #admin{
     overflow: hidden;
     .navigator{
+        // background:yellowgreen;
         max-width: 1140px;
         margin:0 auto;
         height: 120px;
+        border-radius: 10px;
         .img{
             width: 150px;
             float: left;
@@ -11,6 +13,13 @@
         .logo{
             width: 150px;
             cursor: pointer;
+        }
+        .login{
+            float: right;
+            padding:18px;
+            margin:30px;
+            color: #999;
+            font-size:18px;
         }
         .user{
             float: right;
@@ -28,9 +37,13 @@
                 top:35px;
                 cursor: pointer;
             }
+            p{
+                margin-top:90px;
+                text-align: center;
+            }
             ul{
                 position: absolute;
-                top:100px;
+                top:120px;
                 width: 100px;
                 left:-25px;
                 text-align: center;
@@ -74,6 +87,15 @@
                 color:rgb(243, 130, 9);
             }
         }
+    }
+    .breadNav{
+        text-align: left;
+        font-size: 16px;
+        max-width: 1140px;
+        margin: 0 auto;
+        line-height: 30px;
+        padding-left: 30px;
+        color:rgb(95, 60, 25);
     }
     .main{
         max-width: 1140px;

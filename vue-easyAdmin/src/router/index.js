@@ -9,8 +9,6 @@ import document from '@/components/document'
 
 Vue.use(Router)
 
-const token = window.localStorage.getItem('token')
-
 const router = new Router({
   mode: 'history',
   routes: [
@@ -33,16 +31,14 @@ const router = new Router({
     {
       path: '/admin',
       component: admin,
-      // meta: {
-      //   title: '后台管理'
-      // },
       children: [
         {
           path: '/project',
           component: project,
           name: 'project',
           meta: {
-            title: '我的项目'
+            title: '我的项目',
+            login: true
           }
         },
         {
@@ -50,7 +46,8 @@ const router = new Router({
           name: 'workbench',
           component: workbench,
           meta: {
-            title: '我的工作台'
+            title: '我的工作台',
+            login: true
           }
         },
         {
@@ -62,16 +59,29 @@ const router = new Router({
           }
         }
       ]
+    },
+    {
+      path: '*',
+      redirect: () => {
+        return '/'
+      }
     }
   ]
 })
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  if (!token && (to.path === '/project' || to.path === '/workbench')) {
-    if (to.path === '/project' && to.query) {
-      next('/login?redirect=project')
-    } else if (to.path === '/workbench' && to.query) {
-      next('/login?redirect=workbench')
+  // router.app就是Vue实例
+  const token = router.app.$util.fetch('token')
+  // 判断嵌套路由只要有一个需要登录都要登录
+  if (to.matched.some((item) => item.meta.login)) {
+    if (token.login) {
+      next()
+    } else {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.path.split('/')[1]
+        }
+      })
     }
   } else {
     next()

@@ -21,7 +21,10 @@ export default {
         backTohome() {
             this.$router.push('/')
         }
-    }
+    },
+    created() {
+        this.$util.save(1);
+    },
 }
 </script>
 
