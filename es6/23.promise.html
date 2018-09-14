@@ -19,7 +19,7 @@
           catch(),只要有错，后面的then就不会执行。catch和then一样，返回一个默认的promise的成功
 
 
-          promise.all()任务队列，一起完成才执行后续代码。两个任务都完成了
+          promise.all([])任务队列，一起完成才执行后续代码。两个任务都完成了
           传进来的数据是一数组
 
           promise.race()谁先跑完就触发then，另外的就不管了，传递进来的值是先
@@ -35,27 +35,68 @@
         function fn(){
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    reject();
+                    // reject('失败1');
+                    resolve('成功1')
                 }, 1000)
             })
         }
+        
+        function fn1(){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('成功2')
+                },2000)
+            })
+        }
+        // // then返回的是一个promise
+        // fn().then(() => {
+        //     console.log('success'); // 1s后打印success  
+        //     // 默认返回一个状态为resolve的promise
+        // }, () => {
+        //     console.log('failed')
+        //      // 默认返回一个状态为resolve的promise
+        //      /* 
+        //         如果要返回一个rejected
+        //       */
+        //       return Promise.reject();
+        // }).then(() => {
+        //     console.log('success1');
+        // },() => {
+        //     console.log('failed1'); // 1s后先打印failed 然后再打印success1
+        // })
+        // .catch(() => {
+        //     console.log('catch')
+        // })
 
-        let result = new fn();
-        // then返回的是一个promise
-        result.then(() => {
-            console.log('success'); // 1s后打印success  
-            // 默认返回一个状态为resolve的promise
-        }, () => {
-            console.log('failed')
-             // 默认返回一个状态为resolve的promise
-             /* 
-                如果要返回一个rejected
-              */
-              return Promise.reject();
-        }).then(() => {
-            console.log('success1');
-        },() => {
-            console.log('failed1'); // 1s后先打印failed 然后再打印success1
+        // fn().then(() => {
+        //     console.log('成功1')
+        // }, () => {
+        //     console.log('失败')
+        //     return fn1()
+        // }).then(() => {
+        //     console.log('成功2')
+        // }, () => {
+        //     console.log('失败')
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+
+        // then 和catch 方法返回的是一个默认resolved状态的promise对象, promise不能精确的控制每一步流程，如果用catch的话最好不要用then的第二个参数
+        // fn().then(() => {
+        //     console.log('成功1')
+        //     return fn1();
+        // }, () => {
+        //     console.log('a')
+        // }).then(() => {
+        //     console.log('成功2')
+        // }, () => {
+        //     console.log('b')
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+        let result = Promise.all([fn(), fn1()]);
+        result.then((res) => {
+            console.log(res)
         })
     </script>
 </body>

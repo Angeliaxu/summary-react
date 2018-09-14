@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import queryString from 'querystring'
 // axios({
 //     method: 'get',
 //     url: 'https://www.easy-mock.com/mock/5b98b9fa7d22f221e9ec9601/user/userInfo',
@@ -96,14 +96,14 @@ const service = axios.create({
     },
     // 只对post、patch、put方法有效，允许在向服务器发送前，修改请求数据
     transformRequest:[function(data){
-        console.log(data)
+        // console.log(data)
         // 必须要return data，如果不return 请求的时候参数会没有
-        return data
+        return queryString.stringify(data)
     }],
     // 对服务器端在传入then或者catch之前对数据进行处理
     transformResponse: [function (data) {
         // 对 data 进行任意转换处理
-        console.log(data)
+        // console.log(data)
         // 必须要return data，如果不return 返回的data是undefined
         return data
     }],
