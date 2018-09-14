@@ -1,5 +1,5 @@
 /* 
-    全局对象global
+    全局对象global(本质上，浏览器的window其实就是扩展至ECMAScript中的global)
     __dirname:
     __filename:
     eventLoop:
