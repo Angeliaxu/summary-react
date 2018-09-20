@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        if (!Function.prototype.bind) {
+        
             Function.prototype.bind = function(oThis) {
                 if (typeof this !== 'function') {
                     // closest thing possible to the ECMAScript 5
@@ -19,23 +19,30 @@
                     fToBind = this,
                     fNOP    = function() {},
                     fBound  = function() {
-                    return fToBind.apply(this instanceof fNOP
-                            ? this
-                            : oThis,
-                            aArgs.concat(Array.prototype.slice.call(arguments)));
+                        return fToBind.apply(this instanceof fNOP
+                                ? this
+                                : oThis,
+                                aArgs.concat(Array.prototype.slice.call(arguments)));
                     };
-
+                console.log(this instanceof fNOP)
+                console.log(aArgs.concat(Array.prototype.slice.call(arguments)))
                 if (this.prototype) {
-                // Function.prototype doesn't have a prototype property
-                fNOP.prototype = this.prototype; 
+                    // Function.prototype doesn't have a prototype property
+                    fNOP.prototype = this.prototype; 
                 }
                 fBound.prototype = new fNOP();
 
                 return fBound;
             };
-        }    
+            
 
-        
+        var obj = {
+            a: 1
+        }
+        function getA() {
+            console.log(this.a)
+        }
+        getA.bind(obj,1)
     </script>
 </body>
 </html>
