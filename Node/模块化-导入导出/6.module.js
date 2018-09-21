@@ -8,3 +8,7 @@
 */
 console.log(module)
 console.log(exports == module.exports); // true
+
+console.log('6', require.main === module) // false
+
+console.log('6main', require.main)
