@@ -12,5 +12,5 @@
 */
 const fs = require('fs');
 fs.stat('5.fs.stats.js', (err, res) => {
-    console.log(res)
+    console.log(res.isFile())
 })
