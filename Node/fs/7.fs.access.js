@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 /* 
     fs.access(path[,mode],callback)
     mode： default fs.constants.F_OK,判断文件是否存在
@@ -6,7 +8,6 @@
         fs.constants.X_OK：文件是否可执行
 */
 
-const fs = require('fs')
 // fs.access('tmp/6.txt', fs.constants.R_OK, (err) => {
 //     console.log(err);
 // })
@@ -63,5 +64,32 @@ const fs = require('fs')
 // })
 
 /* 
+    fs.watchFile()
+    监听某个文件的改变
     fs.unwatchFile(filename[, listener])
+    停止监听某个文件的改变
+    fs.watch()比fs.watchFile()和fs.unWatchFile更高效。一般使用前者，除非有必要的话才使用后者
+    如果fs.unwatchFile(),第二个参数没写，默认移除所有监听改变的事件，可以指定移除某个监听事件
+*/
+// function addListeners(){
+//     console.log('333333');
+// }
+// let i = 0;
+// fs.watchFile('tmp/6.txt', ()=>{
+//     console.log('listener1');
+//     i++;
+//     if(i === 2){
+//         fs.unwatchFile('tmp/6.txt', addListeners)
+//     }
+// })
+// fs.watchFile('tmp/6.txt', ()=>{
+//     console.log('listener2')
+// })
+// fs.watchFile('tmp/6.txt', addListeners)
+
+
+
+/*
+    fs.utimes(path, atime, mtime, callback)
+    修改指定文件的atime，mtime，如果传入的参数不能正确的解析成数字，或者是NAN、infinity、-infinity，会抛出错误
 */
