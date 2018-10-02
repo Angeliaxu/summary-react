@@ -93,3 +93,8 @@ const fs = require('fs')
     fs.utimes(path, atime, mtime, callback)
     修改指定文件的atime，mtime，如果传入的参数不能正确的解析成数字，或者是NAN、infinity、-infinity，会抛出错误
 */
+
+/**
+ * fs.watch(filename[, options][,listener])
+ * 
+ */
