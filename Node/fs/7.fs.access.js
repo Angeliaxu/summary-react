@@ -95,6 +95,26 @@ const fs = require('fs')
 */
 
 /**
- * fs.watch(filename[, options][,listener])
+ * fs.watch(filename[, options][,listener])并不能在所有系统中使用
+ *  options:
+ *      persistent: 默认为true，当有文件被监听的时候，表示process是否继续运行
+ *      recursive: 默认为false，当被监控的对象是一个文件夹时，表示是否递归监控子目录，还是只监控当前文件夹，只能在macos和windows平台上使用
+ *  listener 
+ *      eventType：change、rename(新建文件或者删除文件都是rename)  
+ *      filename：并不是百分百的提供，需要判断下 
+ */
+// fs.watch('tmp', {persistent: true, recursive: true}, (eventType, filename)=> {
+//     console.log(eventType)
+//     if(filename){
+//         console.log(filename)
+//     } else {
+//         console.log('filename is not exist')
+//     }
+    
+// })
+
+/**
+ *  fs.writeFile(file, data[, options], callback)
+ *  向指定的文件写入数据，如果文件已存在，那么替换该文件
  * 
  */
