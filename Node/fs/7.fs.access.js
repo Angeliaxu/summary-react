@@ -116,5 +116,8 @@ const fs = require('fs')
 /**
  *  fs.writeFile(file, data[, options], callback)
  *  向指定的文件写入数据，如果文件已存在，那么替换该文件
+ *  如果data是buffer，那么encoding将会忽略，
+ *  note：如果对同一个文件在没有等待回调函数前进行多次修改，使用这个方法将不会安全
+ *  更推荐使用fs.createWriteStream()
  * 
  */

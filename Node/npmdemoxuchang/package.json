@@ -1,0 +1,16 @@
+{
+  "name": "npmdemoxuchang",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.basic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "angeliaxu",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "react": "^16.5.2"
+  }
+
+}
