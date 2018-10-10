@@ -15,7 +15,9 @@
                 defaultValue：选项默认值，如果需要的话
 */
 
-/* const program = require('commander');
+const program = require('commander');
+const fs = require('fs')
+
 program
     .version('1.0.0') // 在命令行传入参数--version，-V输出当前shell版本
     .option('-p, --peppers', 'add peppers')
@@ -23,9 +25,8 @@ program
     .option('-b, --bbq-sauce', 'Add bbq sauce')
     .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
     .option('--no-sauce', ' remove sauce')
-    .parse(process.argv) // 解析用户传入的argv命令字符串参数,command同时会创建 一个--help，-h的选项*/
-// console.log('program', program.peppers)
-/* console.log('u ordered a pizza with')
+    .parse(process.argv)
+console.log('u ordered a pizza with')
 if(program.peppers)console.log(' - peppers ')
 if(program.pineapple)console.log(' - pineapple ')
 if(program.bbqSauce)console.log(' - bbq ')
@@ -34,20 +35,19 @@ if(program.sauce){
 }else{
     console.log('without sauce')
 }
+console.log(program.sauce)
+//  %s 能让前后顺序颠倒
 console.log(' - %s cheese ', program.cheese)
-console.log(program.sauce) */
 /* 
     1. 解析用户传入的命令字符串参数：短命令可以列如-p，-P,-b,-c，可写成 -pPbc
     2. 多个word解析成驼峰，列如-bbq-sauce，解析成program.bbqSauce
-    3. 通过--no开头的前缀，代表program.值是false。列如：--no-sauce表示program.sauce为false
+    3. 通过--no开头的前缀，代表program.值是false。列如：当传入--no-sauce表示program.sauce为false，不传入的时候为true
 */
 
 /* 
     command-specific options
 
 */
-const program = require('commander')
-const fs = require('fs')
 /* 
     递归删除文件夹
         存在的问题，只能删除文件夹，不能删除文件
@@ -82,8 +82,5 @@ program
             console.log('命令有错')
         }
     })
-    // .option('-a, --add-item [item]', '增加项目', function(val){
-    //     console.log(val)
-    // }, [1,2,3])
 
-program.parse(process.argv)
+program.parse(process.argv) // 解析用户传入的argv命令字符串参数,command同时会创建 一个--help，-h的选项
