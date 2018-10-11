@@ -1,7 +1,9 @@
 const program = require('commander');
 const fs = require('fs');
+const chalk = require('chalk');
+const log = console.log;
 
-// 模拟ls命令
+// 模拟ls命令,具体学会怎么使用chalk
 /* 
     显示指定目录下的所有文件
 */
@@ -14,14 +16,19 @@ program
             let str = '';
             content.map((item) => {
                 if(fs.statSync(item).isDirectory()) {
-                    str += ` [目录] ${item} \r\n`
+                    // str += chalk.red.bold.underline(chalk` [目录] ${item} \r\n`)
+                    str += chalk` {green [目录]} {green ${item}} \r\n`
                 } else {
-                    str += ` [文件] ${item} \r\n`
+                    if(item.startsWith('.')) {
+                        str += chalk.red(` [系统文件] ${item} \r\n`)
+                    } else {
+                        str += ` [文件] ${item} \r\n`
+                    }
                 }
             })
-            console.log(str)
+            log(str)
         } catch (error) {
-            console.log(error)
+            log(error)
         }
     })
 /* 
@@ -38,4 +45,11 @@ program
 //             console.log(error)
 //         }
 //     })
+
+/* 
+    chalk：改变命令行颜色,可以链式调用
+    API
+        color
+
+*/
 program.parse(process.argv)
