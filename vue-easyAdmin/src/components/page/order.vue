@@ -29,6 +29,7 @@ export default {
         max-width: 1140px;
         margin: 0 auto;
         padding-top: 25px;
+        overflow: hidden;
         .left {
             width: 11%;
             float: left;
@@ -37,6 +38,7 @@ export default {
             width: 80%;
             height: 100%;
             float: left;
+            border: 1px solid #eee
         }
     }
  </style>

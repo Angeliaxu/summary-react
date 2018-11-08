@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局</title>
+    <style>
+        .container {
+            padding: 0 220px 0 200px;
+            overflow: hidden;
+            min-width: 400px;
+        }
+        .main,.left, .right {
+            float: left;
+            position: relative;
+        }
+        .main {
+            background: red;
+            width: 100%;
+        }
+        .left {
+            background: blueviolet;
+            width: 200px;
+            margin-left: -100%;
+            left: -200px;
+        }
+        .right {
+            background: violet;
+            width: 220px;
+            margin-left: -220px;
+            right: -220px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 目的：左右两栏固定宽度，中间部分自适应 -->
+    <!-- 
+        思路：
+            1.  三个div，middle，left，right，left和right固定宽度，middle100%，分别浮动
+            2.  包含三个div的container给左右padding，分别是left 和 right 宽度
+            3.  left的margin-left 100%，左边与middle左边重合，顶部与middle顶部重合
+            4.  给left的position为relative，left为-left宽度，这样左边固定了
+            5.  给right的margin-left为right宽度
+            6.  给right的position为relative，right为-right宽度，这样右边固定了
+     -->
+    <div class="container">
+        <div class="main">山东黄金暗红色的骄傲和大家哈看合适的回到家暗红色的哈记得贺卡和大伙的哈哈是大红大好的哈师大等哈说空间大会记得哈师大</div>
+        <div class="left">大撒旦撒旦是的纳税蛋蛋那好的骄傲和大家爱护实打实大红色的哈桑单好大好大好大回事等哈说的哈的哈哈大红色大打哈好的哒</div>
+        <div class="right">大环境啊哈哈大好的哈就好发客户大会上客户肯定和喀什的卡号很大很大护额如大好的哈多久啊哈哈啥课大会打瞌睡的哈哈哒</div>
+    </div>
+</body>
+</html>

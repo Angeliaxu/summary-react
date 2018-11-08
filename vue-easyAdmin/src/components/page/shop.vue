@@ -1,6 +1,6 @@
 <template>
     <div id="shop">
-        <div class="">
+        <div class="make-order">
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="点餐" name="first">
                     <el-table
@@ -22,8 +22,18 @@
                 <el-tab-pane label="挂单" name="second">2</el-tab-pane>
                 <el-tab-pane label="外卖" name="third">3</el-tab-pane>
             </el-tabs>
+            <p class="buttons">
+                <el-button type="warning">挂单</el-button>
+                <el-button type="danger">删除</el-button>
+                <el-button type="success">结账</el-button>
+            </p>
         </div>
-        <div class="">
+        <div class="menue">
+            <div class="top">
+                <h3>发布商品</h3>
+                <ul></ul>
+            </div> 
+            <div class="bottom"></div>
         </div>
     </div>
 </template>
@@ -60,7 +70,15 @@ export default {
 
  <style scoped lang="scss">
  #shop {
+     width: 321px;
      .el-tabs {
+         display: inline-block;
+     }
+     .buttons {
+         margin-top: 30px;
+         text-align: center;
+     }
+     .make-order, .menue {
          display: inline-block;
      }
  }
