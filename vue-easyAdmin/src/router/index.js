@@ -7,6 +7,11 @@ import project from '@/components/project'
 import workbench from '@/components/workbench'
 import document from '@/components/document'
 
+// 餐饮admin有关page
+import homepage from '@/components/page/homepage';
+import main from '@/components/page/order';
+import shop from '@/components/page/shop';
+
 Vue.use(Router)
 
 const router = new Router({
@@ -15,9 +20,10 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: home,
+      // component: home,
+      component: homepage,
       meta: {
-        title: '个人管理后台'
+        title: '小餐馆收银台'
       }
     },
     {
@@ -56,6 +62,24 @@ const router = new Router({
           component: document,
           meta: {
             title: '我的文档'
+          }
+        }
+      ]
+    },
+    {
+      path: '/main',
+      name: main,
+      component: main,
+      meta: {
+        title: '订餐系统'
+      },
+      children:[
+        {
+          path: '/shop',
+          name: 'shop',
+          component: shop,
+          meta: {
+            title: '店铺'
           }
         }
       ]

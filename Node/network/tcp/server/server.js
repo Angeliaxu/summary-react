@@ -39,8 +39,9 @@ server.on('connection', (socket) => {
     // remoteAddress、remotePort表示客户端发送输的地址以及端口号
     //     console.log(socket.remoteAddress,socket.remotePort)
     // })
+    let pic;
     try {
-        const pic = fs.readFileSync('../1.jpg');
+        pic = fs.readFileSync('../1.jpg');
     } catch (error) {
         console.log(err)
     }

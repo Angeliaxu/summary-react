@@ -1,10 +1,21 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+
+import './scss/main.scss'
 import App from './App'
 import router from './router'
-import '../scss/main.scss'
 import utils from './libs/utils'
+
+// element-ui
+import { 
+  Button,
+  Input,
+  Tabs,
+  TabPane,
+  Table,
+  TableColumn,
+ } from 'element-ui'; 
 
 Vue.config.productionTip = false
 
@@ -22,6 +33,13 @@ Vue.prototype.$utils = '自定义属性'
 //   }
 // }
 Vue.use(utils)
+
+Vue.use(Button)
+Vue.use(Input)
+Vue.use(Tabs),
+Vue.use(TabPane)
+Vue.use(Table)
+Vue.use(TableColumn)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
