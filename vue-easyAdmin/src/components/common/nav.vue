@@ -62,7 +62,6 @@ export default {
 
  <style lang="scss" scoped>
     #left-nav {
-        width: 120px;
         height: 100%;
         text-align: center;
         background: #409EFF;

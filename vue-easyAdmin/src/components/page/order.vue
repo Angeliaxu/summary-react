@@ -29,16 +29,20 @@ export default {
         max-width: 1140px;
         margin: 0 auto;
         padding-top: 25px;
+        // margin-top: 25px;
         overflow: hidden;
+        background: #409EFF;
         .left {
-            width: 11%;
+            width: 105px;
             float: left;
         }
         .right {
-            width: 80%;
+            width: 1033px;
             height: 100%;
             float: left;
-            border: 1px solid #eee
+            border: 1px solid #eee;
+            background: #fff;
+            min-height: 475px;
         }
     }
  </style>
