@@ -6,7 +6,7 @@
         <h1>欢迎来到屁格餐厅</h1>
         <h2>Yummy Food</h2>
         <form>
-            <el-input v-model="username" placeholder="请输入用户名"></el-input>
+            <el-input v-model="username" placeholder="请输入用户名dd"></el-input>
             <el-input v-model="password" placeholder="请输入密码" type="password"></el-input>
             <el-button @click="username&&password&&login()">登录</el-button>
         </form>
@@ -25,7 +25,13 @@ export default {
     created() {},
     methods: {
         login() {
-            this.$router.push('/main')
+            this.$fetch.get('/login').then(res => {
+                console.log(res)
+                this.$router.push('/main')
+            })
+            .catch(err => {
+                console.log(err)
+            })
         },
     }
 }

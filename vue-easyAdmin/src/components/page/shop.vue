@@ -64,7 +64,7 @@
 
 <script>
 import foodList from './foodList'
-
+import './list.js';
 export default {
     components: {
         foodList
@@ -117,6 +117,7 @@ export default {
                     message: '数据获取失败'
                 })
             })
+            this.$fetch.get('http://127.0.0.1:8081')
         },
         addFood(item) {
             let list = this.activeName === 'order' ? this.orderList : this.takeoutList;
