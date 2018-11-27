@@ -32,15 +32,15 @@
 /* 
     3
 */
-async function aa (){
-    console.log(1)
-    console.log(await bb());
-    console.log(2);
-}
-async function bb() {
-    console.log(3)
-}
-aa();
+// async function aa (){
+//     console.log(1)
+//     console.log(await bb());
+//     console.log(2);
+// }
+// async function bb() {
+//     console.log(3)
+// }
+// aa();
 
 
 /* 
@@ -123,3 +123,11 @@ aa();
 //     })
 // })
 
+Promise.resolve().then(() => {
+    console.log('promise2')
+    setTimeout(() => console.log('setTimeout2'))
+  })
+  setTimeout(() => {
+    console.log('setTimeout1')
+    Promise.resolve().then(() => console.log('promise1'))
+  })
