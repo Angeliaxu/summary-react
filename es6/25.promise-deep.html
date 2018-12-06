@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        * state machine: 状态机
+        *
+        */
+       var PENDING = 0;
+       var FULFILLED = 1;
+       var REJECTED = 2;
+
+       function Promise(fn) {
+            //  存储promise状态
+           var state = PENDING;
+           var value = null;
+           var handlers = [];
+
+           function fulfill(result) {
+               state = FULFILLED;
+               value = result;
+           }
+           function reject(error) {
+               state = REJECTED;
+               value = error;
+           }
+           function resolve(result) {
+               try {
+                   var then = getThen(result);
+                   if (then) {
+                       doResolve(this.bind(result), resolve, reject);
+                       return;
+                   }
+                   fulfill(result)
+               } catch (e) {
+                   reject(e)
+               }
+           }
+           doResolve(fn, resolve, reject)
+       }
+       function getThen (value) {
+           var t = typeof value;
+           if (value && (t === 'object' || t === 'function')) {
+               var then = value .then;
+               if (typeof then === 'function') {
+                   return then;
+               }
+           }
+           return null;
+       }
+       function doResolve(fn, onFulfilled, onRejected) {
+           var done = false;
+           try {
+               fn (function (value) {
+                   if (done) return;
+               }, function (reason) {
+                   if (done) return;
+                   done = true;
+                   onRejected(reason)
+               })
+           } catch (ex) {
+               if (done) return 
+               done = true;
+               onRejected(ex);
+           }
+       }
+    //    let p6 = new Promise((resolve, reject)=>{
+    //     //    resolve(x);
+    //     // console.log(x);
+    //     // resolve()
+    //     throw new Error('test')
+    //    })
+    //    p6
+    //     .then(()=>{})
+    //     .catch((err)=>{
+    //         console.log(err)
+    //     })
+    //    setTimeout(()=>{console.log(1234)}, 6000)
+
+        // 函数体外捕获错误
+      /*   let p7 = new Promise((resolve, reject)=>{
+            resolve('ok');
+            // setTimeout(() => {
+            //     throw new Error('test')
+            //     console.log(345)
+            // }, 1000);
+        })
+        p7.then((value)=>{
+            console.log(value)
+        })
+        .catch(err => console.log(err))
+        .then(resolve => console.log(resolve))
+        setTimeout(()=>{console.log(123)}, 1000) */
+
+        const someAsyncThing = function() {
+            return new Promise(function(resolve, reject) {
+                // 下面一行会报错，因为x没有声明
+                resolve(x + 2);
+            });
+        };
+
+        someAsyncThing().then(function() {
+            return someOtherAsyncThing();
+            }).catch(function(error) {
+            console.log('oh no', error);
+            // 下面一行会报错，因为 y 没有声明
+            y + 2;
+        }).then(function() {
+            console.log('carry on');
+        });
+    </script>
+</body>
+</html>
