@@ -13,7 +13,16 @@ import * as serviceWorker from './serviceWorker';
 // import CreateRefs from './component/createRefs';
 // import NotControllForm from './component/10.notControllForm';
 // import Performance from './component/11.performance';
-import Todo from './component/13.todo';
+// import Todo from './component/13.todo';
+// import './reducer/counter'
+// import './reducer/avoidArrayMutation'
+// import './reducer/todoReducer'
+// import './reducer/todoReducer'
+// import './reducer/toggleTodo'
+// import './reducer/1.reducerCompostionObject'
+// import './reducer/2.combineReducer'
+import './reducer/4.todoAppExample'
+
 
 // function Clock(props) {
 //     return (
@@ -100,7 +109,7 @@ class Clock extends React.Component {
     }
 }
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+// ReactDOM.render(<Todo />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

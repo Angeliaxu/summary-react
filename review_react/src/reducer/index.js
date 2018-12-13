@@ -1,4 +1,5 @@
-
+import React from 'react';
+import ReactDOM from 'react-dom';
 //  write counter reducer,counter must be pure function，reducer manage the state
 // import { createStore } from 'redux';
 function counter(state = 0, action) {
@@ -20,8 +21,6 @@ console.log(store.getState())
 // 第二个dispatch。change the state of the application
 /* store.dispatch({type: 'INCREMENT'})
 console.log(store.getState()) */
-
-
 
 //  Reimplement createStore
  function createStore(reducer) {
