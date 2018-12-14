@@ -21,7 +21,8 @@ import * as serviceWorker from './serviceWorker';
 // import './reducer/toggleTodo'
 // import './reducer/1.reducerCompostionObject'
 // import './reducer/2.combineReducer'
-import './reducer/4.todoAppExample'
+// import './reducer/4.todoAppExample'
+import './reducer/5.refactorTodoApp'
 
 
 // function Clock(props) {
