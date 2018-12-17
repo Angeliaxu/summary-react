@@ -22,7 +22,11 @@ import * as serviceWorker from './serviceWorker';
 // import './reducer/1.reducerCompostionObject'
 // import './reducer/2.combineReducer'
 // import './reducer/4.todoAppExample'
-import './reducer/5.refactorTodoApp'
+// import './reducer/5.refactorTodoApp'
+// import './reducer/6.extractingContainner'
+// import './reducer/7.useContext'
+// import './reducer/8.useReactRedux';
+import './reducer/9.writeMapActionAndMapstate'
 
 
 // function Clock(props) {

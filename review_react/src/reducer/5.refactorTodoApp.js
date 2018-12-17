@@ -168,7 +168,6 @@ const TodoApp = ({ todos, visibilityFilter }) => {
     )
 }
 
-
 const render = () => {
     ReactDOM.render(<TodoApp 
         todos={store.getState().todoReducer} 
