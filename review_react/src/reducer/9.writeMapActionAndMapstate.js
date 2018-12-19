@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers} from 'redux';
+import { connect } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
@@ -224,9 +225,36 @@ class Provider extends React.Component {
 Provider.childContextTypes = {
     store: PropTypes.object
 };
-
+const store = createStore(reducers);
 ReactDOM.render(
-<Provider store = {createStore(reducers)}>
+<Provider store = {store}>
     <TodoApp />
 </Provider>, document.getElementById('root'));
+
+/* 
+    实现mapStateToProps,接受store的state作为参数，并且把组件需要用到的props暴露出来
+*/
+function mapStateToProps(state) {
+    return {
+        todos: getVisibleTodos(state.todoReducer, state.visibilityFilter)
+    }
+}
+/* 
+    
+*/
+function mapDispatchToProps(dispatch) {
+    return {
+        onTodoClick: (id) => {
+            dispatch({
+                type: 'TOGGLE_TODO',
+                id
+            })
+        }
+    }
+}
+
+const VisibleTodoList = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList)
 
