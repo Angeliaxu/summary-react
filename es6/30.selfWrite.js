@@ -1,4 +1,4 @@
-class Promise{
+/* class Promise{
     constructor(fn) {
         this.value;
         this.status = 'pending';
@@ -6,7 +6,6 @@ class Promise{
         // 使用bind返回的是一个新函数,绑定this
         const resolve = this.resolve.bind(this);
         const reject = this.reject.bind(this)
-        
         // 处理异常错误
         try {
             fn(resolve, reject)
@@ -75,7 +74,8 @@ class Promise{
         })
     }
 }
-let p = new Promise((resolve, reject)=>{
+let p = new Promise((resolve, reject) => {
+    console.log(this)
     // setTimeout(() => {
     //     resolve(5)
     // }, 1000);
@@ -83,41 +83,71 @@ let p = new Promise((resolve, reject)=>{
     resolve(6666)
 })
 p.then(value => {
+    console.log(value)
     return new Promise((resolve) => {
         resolve(555)
     })
     // return 1
 }).then(value1 => {
     console.log('value1', value1)
-})
+}) */
 
 /* .then((value2)=>{
     console.log(value2)
 }).then((value3)=>{
     console.log(value3)
 }) */
-/* then(successfn, errfn) {
-    if(this.status === 'resolve') {
-      return new Promise1((res, rej) => {
-        successfn(this.data)
-      })
-    }
-    if(this.status === 'reject') {
-      console.log('reject')
-    }
-    if(this.status === 'pending') {
-      const that = this
-      return new Promise1((res, rej)=>{
-        that.resolveCallback.push(function(value) {
-          var x = successfn(value)
-          if(x instanceof Promise1) {
-            x.then(res, rej)
-          } else {
-            res(x)
-          } 
-        })
-       
-      })
-    } */
 
-//   }
+
+class Promise {
+    constructor(fn) {
+        this.status = 'pending';
+        this.value;
+        this.chain = [];
+        const resolve = this.resolve.bind(this);
+        fn(resolve)
+    }
+    resolve(value) {
+        this.status = 'resolve';
+        this.value = value;
+        // return promise后的then回调在这里
+        for(let {_onResolved} of this.chain) {
+            _onResolved(this.value)
+        }
+    }
+    then(onResolvedCallback) {
+        return new Promise((resolve) => {
+            const _onResolved = function(res) {
+                let result = onResolvedCallback(res);
+                if (result instanceof Promise) {
+                    result.then(resolve);
+                } else {
+                    resolve(result);
+                    
+                }  
+            }
+            if(this.status === 'resolve') {
+                _onResolved(this.value)
+            }else {
+                this.chain.push({
+                    _onResolved
+                })
+            }
+        })    
+    }
+}
+
+let p = new Promise((resolve, reject) => {
+    // resolve('success');
+    setTimeout(()=> {
+        resolve('33333')
+    }, 5000)
+})
+p.then((value) => {
+    console.log(value)
+    return new Promise((resolve) => {
+        resolve(9999)
+    })
+}).then((res)=>{
+    console.log(res);
+})

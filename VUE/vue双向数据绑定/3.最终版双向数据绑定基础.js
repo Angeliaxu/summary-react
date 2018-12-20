@@ -1,5 +1,6 @@
 
 let target = null;
+// dep类用来实现发布订阅模式
 class Dep {
     constructor() {
         this.subscriber = [];
@@ -48,3 +49,5 @@ watcher(()=> {
     data.total = data.price * data.quantity;
 })
 console.log(data.total)
+
+console.log(/NOT WLComponentDidMount/g.test('sdasdsdsNOT WLComponentDidMountdhajsdhkashdajshdajhNOT WLComponentDidMount'));
