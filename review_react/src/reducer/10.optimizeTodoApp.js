@@ -1,7 +1,10 @@
-import { createStore, combineReducers } from 'redux';
-import { Provider, connect} from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom'
+import { createStore, combineReducers } from 'redux';
+import { Provider, connect} from 'react-redux';
+import { throttle } from 'lodash';
+import {saveState, loadState} from './lib/localStorage';
+const uuidv4 = require('uuid/v4');
 
 const todoReducer = (state = [], action) => {
     const { type } = action;
@@ -42,7 +45,25 @@ const reducers = combineReducers({
     todoReducer,
     visibilityFilter
 })
-const store = createStore(reducers)
+/* 
+    createStore的第二个参数是给redux的state赋默认值
+        赋值流程：
+            当子reducer被调用之前，先赋值。如果子reducer调之前，state是为undefined，那么调用reduce
+            之后才会走reducer里面的赋值流程。
+        注意：
+            如果给state一个默认的null，那么子reducer不会认为state是undefined，并且不会自动默认赋值
+            所以区别undefined 和 null 非常重要。
+*/
+const persistedState = loadState();
+
+const store = createStore(reducers, persistedState);
+
+// 节流
+store.subscribe(throttle(() => {
+    saveState({
+        todoReducer: store.getState().todoReducer
+    })
+}, 10000))
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
@@ -55,27 +76,21 @@ const getVisibleTodos = (todos, filter) => {
     }
 }
 
-// 以下代码是把dispatch抽离出来，在大型项目中，为了更好的管理
-const toggleTodo = (id) => {
-    return {
-        type: 'TOGGLE_TODO',
-        id
-    }
-}
+// 箭头函数如果返回的是一个对象，请记得使用（）把对象包裹起来
+const toggleTodo = (id) => ({
+    type: 'TOGGLE_TODO',
+    id
+})
 let nextTodoId = 0;
-const addTodo = (value) => {
-    return {
-        type: 'ADD_TODO',
-        id: nextTodoId ++,
-        text: value,
-    }
-}
-const tabTodo = (filter) => {
-    return {
-        type: 'SET_VISIBILITY_FILTER',
-        filter,
-    }
-}
+const addTodo = (value) => ({
+    type: 'ADD_TODO',
+    id: uuidv4(),
+    text: value,
+})
+const tabTodo = (filter) => ({
+    type: 'SET_VISIBILITY_FILTER',
+    filter,
+})
 // todo
 const Todo = ({ text, compeleted, onClick}) => {
     return (
@@ -195,8 +210,3 @@ ReactDOM.render(
 <Provider store = {store}>
     <TodoApp />
 </Provider>, document.getElementById('root'));
-
-/* 
-    connect 是一个柯里化函数（curried function），使用connect来传递props和dispatch。这样组件就可以不用声明
-    contextTypes来取context中的store。connect的作用就是使组件不用声明contextTypes就可以直接取props和dispatch
-*/

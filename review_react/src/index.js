@@ -26,7 +26,9 @@ import * as serviceWorker from './serviceWorker';
 // import './reducer/6.extractingContainner'
 // import './reducer/7.useContext'
 // import './reducer/8.useReactRedux';
-import './reducer/9.writeMapActionAndMapstate'
+// import './reducer/9.writeMapActionAndMapstate'
+// import './reducer/10.optimizeTodoApp'
+import './reducer/11.middleware'
 
 
 // function Clock(props) {
