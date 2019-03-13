@@ -1,50 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux';
-import { Provider, connect} from 'react-redux';
-import { throttle } from 'lodash';
-import {saveState, loadState} from './lib/util/localStorage';
-const uuidv4 = require('uuid/v4');
+import { bindActionCreators} from 'redux';
+import { connect} from 'react-redux';
+import { toggleTodo, addTodo, tabTodo} from '../action/actionCreator';
 
-const todoReducer = (state = [], action) => {
-    const { type } = action;
-    switch (type) {
-        case 'ADD_TODO':
-            return [
-                ...state,
-                {
-                    text: action.text,
-                    id: action.id,
-                    compeleted: false
-                }
-            ];
-        case 'TOGGLE_TODO':
-            return state.map(item => {
-                if (item.id === action.id) {
-                    return {
-                        ...item,
-                        compeleted: !item.compeleted
-                    }
-                }
-                return item;
-            })
-        default:
-            return state;
-    }
-} 
-const visibilityFilter = (state = 'SHOW_ALL', action) => {
-    const { type } = action;
-    switch (type) {
-        case 'SET_VISIBILITY_FILTER': 
-            return action.filter;
-        default:
-            return state;
-    }
-}
-const reducers = combineReducers({
-    todoReducer,
-    visibilityFilter
-})
 /* 
     createStore的第二个参数是给redux的state赋默认值
         赋值流程：
@@ -54,16 +12,7 @@ const reducers = combineReducers({
             如果给state一个默认的null，那么子reducer不会认为state是undefined，并且不会自动默认赋值
             所以区别undefined 和 null 非常重要。
 */
-const persistedState = loadState();
 
-const store = createStore(reducers, persistedState);
-
-// 节流
-store.subscribe(throttle(() => {
-    saveState({
-        todoReducer: store.getState().todoReducer
-    })
-}, 10000))
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
@@ -76,21 +25,6 @@ const getVisibleTodos = (todos, filter) => {
     }
 }
 
-// 箭头函数如果返回的是一个对象，请记得使用（）把对象包裹起来
-const toggleTodo = (id) => ({
-    type: 'TOGGLE_TODO',
-    id
-})
-let nextTodoId = 0;
-const addTodo = (value) => ({
-    type: 'ADD_TODO',
-    id: uuidv4(),
-    text: value,
-})
-const tabTodo = (filter) => ({
-    type: 'SET_VISIBILITY_FILTER',
-    filter,
-})
 // todo
 const Todo = ({ text, compeleted, onClick}) => {
     return (
@@ -146,13 +80,7 @@ let AddTodo = ({onAddClick}) => {
         </div>
     )
 }
-AddTodo = connect(null, (dispatch) => {
-    return {
-        onAddClick: (value) => {
-            dispatch(addTodo(value))
-        }
-    }
-})(AddTodo)
+AddTodo = connect(null, (dispatch) => bindActionCreators({onAddClick: (value) => addTodo(value)}, dispatch))(AddTodo)
 
 // footer
 let Link = ({active, children, onVisiblityClick}) => {
@@ -176,13 +104,17 @@ const mapStateToLinkProps = (state, ownProps) => {
         active: ownProps.filter === state.visibilityFilter
     }
 }
-const mapDispatchToLinkProps =(dispatch, ownProps) => {
+/* const mapDispatchToLinkProps =(dispatch, ownProps) => {
     return {
         onVisiblityClick: () => {
             dispatch(tabTodo(ownProps.filter))
         }
     }
+} */
+const mapDispatchToLinkProps =(dispatch, ownProps) => {
+    return bindActionCreators({onVisiblityClick:() => tabTodo(ownProps.filter)}, dispatch)
 }
+
 const FilterLink = connect(mapStateToLinkProps, mapDispatchToLinkProps)(Link)
 
 const Footer = () => {
@@ -205,8 +137,29 @@ const TodoApp = () => {
         </div>
     )
 }
+export default TodoApp
+/* function applyMiddleware(...middlewares) {
+    return function(createStore) {
+        return function(...agrs) {
+            const store = createStore(...agrs);
+            let dispatch = function() {
+                throw new Error(
+                    `Dispatching while constructing your middleware is not allowed. ` +
+                      `Other middleware would not be applied to this dispatch.`
+                )
+            }
+            const middlewareAPI = {
+                getState: store.getState,
+                dispatch: (...args)=> dispatch(...args)
+            }
+            const chain = middlewares.map(middleware => middleware(middlewareAPI));
+            dispatch = compose(...chain)(store.dispatch)
+            return {
+                ...store,
+                dispatch
+            }
+        }
+    }
+} */
 
-ReactDOM.render(
-<Provider store = {store}>
-    <TodoApp />
-</Provider>, document.getElementById('root'));
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, bindActionCreators} from 'redux';
 import { Provider, connect} from 'react-redux';
 import { throttle } from 'lodash';
 import {saveState, loadState} from './lib/util/localStorage';
@@ -146,13 +146,7 @@ let AddTodo = ({onAddClick}) => {
         </div>
     )
 }
-AddTodo = connect(null, (dispatch) => {
-    return {
-        onAddClick: (value) => {
-            dispatch(addTodo(value))
-        }
-    }
-})(AddTodo)
+AddTodo = connect(null, (dispatch) => bindActionCreators({onAddClick: (value) => addTodo(value)}, dispatch))(AddTodo)
 
 // footer
 let Link = ({active, children, onVisiblityClick}) => {
@@ -176,13 +170,17 @@ const mapStateToLinkProps = (state, ownProps) => {
         active: ownProps.filter === state.visibilityFilter
     }
 }
-const mapDispatchToLinkProps =(dispatch, ownProps) => {
+/* const mapDispatchToLinkProps =(dispatch, ownProps) => {
     return {
         onVisiblityClick: () => {
             dispatch(tabTodo(ownProps.filter))
         }
     }
+} */
+const mapDispatchToLinkProps =(dispatch, ownProps) => {
+    return bindActionCreators({onVisiblityClick:() => tabTodo(ownProps.filter)}, dispatch)
 }
+
 const FilterLink = connect(mapStateToLinkProps, mapDispatchToLinkProps)(Link)
 
 const Footer = () => {
