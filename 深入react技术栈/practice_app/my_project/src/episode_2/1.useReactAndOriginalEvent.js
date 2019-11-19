@@ -17,18 +17,18 @@ export default class UseReactAndOriginalEvent extends React.Component{
         })
     }
     componentDidMount() {
-        document.body.addEventListener('click', e => {
-            console.log(e.target)
-            if (e.target && e.target === this.button.current) {
-                return;
-            }
-            this.setState({
-                active: false
-            })
-        })
+        // document.body.addEventListener('click', e => {
+        //     console.log(e.target)
+        //     if (e.target && e.target === this.button.current) {
+        //         return;
+        //     }
+        //     this.setState({
+        //         active: false
+        //     })
+        // })
     }
     componentWillUnmount() {
-        document.removeEventListener('click')
+        // document.removeEventListener('click')
     }
     render() {
         return (

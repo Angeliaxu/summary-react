@@ -1,22 +1,32 @@
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+// import App from './components/App';
+import Container from './components/setState';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+<Container>
+  <h1>children1</h1>
+  <h2>children2</h2>
+  {/* 字符串 */}
+</Container>, document.getElementById('root'));
 
-const render = Component =>
-  ReactDOM.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
-    document.getElementById('root')
-  );
+// const render = Component =>
+//   ReactDOM.render(
+//     // <AppContainer>
+//       <Container>
+//         <h1>children1</h1>
+//         <h2>children2</h2>
+//         {/* 字符串 */}
+//       </Container>,
+//     // </AppContainer>,
+//     document.getElementById('root')
+//   );
 
-render(App);
+// render(Container);
 
-// Webpack Hot Module Replacement API
-if (module.hot) module.hot.accept('./components/App', () => {
-    render(App);
-    // render(require('./components/App'))
-});
+// // Webpack Hot Module Replacement API
+// if (module.hot) module.hot.accept('./components/App', () => {
+//     render(Container);
+//     // render(require('./components/App'))
+// });
